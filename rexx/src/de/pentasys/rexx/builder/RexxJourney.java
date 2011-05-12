@@ -12,17 +12,15 @@ import de.pentasys.zenal.builder.TimespanDateTime;
 
 public class RexxJourney {
 
-    private final String leavingCity;
-    private final String arrivalCity;
     private final DateTime journeyFrom;
     private final DateTime journeyTill;
     private final Project project;
     private final TreeSet<RexxTrip> trips = new TreeSet<RexxTrip>();
+    private final TripCities tripCities;
 
     RexxJourney(final Project project, final TripCities tripCities, final TimespanDateTime timespanDateTime) {
         this.project = project;
-        leavingCity = tripCities.getLeavingCity();
-        arrivalCity = tripCities.getArrivalCity();
+        this.tripCities = tripCities;
         journeyFrom = timespanDateTime.getFrom();
         journeyTill = timespanDateTime.getTill();
     }
@@ -30,8 +28,7 @@ public class RexxJourney {
     public RexxJourney(final Project project, final TripCities tripCities, final TimespanDateTime timespanDateTime,
             final RexxTrip rexxTrip) {
         this.project = project;
-        leavingCity = tripCities.getLeavingCity();
-        arrivalCity = tripCities.getArrivalCity();
+        this.tripCities = tripCities;
         journeyFrom = timespanDateTime.getFrom();
         journeyTill = timespanDateTime.getTill();
         if (null == rexxTrip) {
@@ -41,16 +38,16 @@ public class RexxJourney {
     }
 
     public RexxJourney withTrip(final TimespanDateTime timeSpan, final String reason) {
-        trips.add(new RexxTrip(timeSpan, reason));
+        trips.add(new RexxTrip(tripCities, timeSpan, reason));
         return this;
     }
 
     public String getLeavingCity() {
-        return leavingCity;
+        return tripCities.getLeavingCity();
     }
 
     public String getArrivalCity() {
-        return arrivalCity;
+        return tripCities.getArrivalCity();
     }
 
     public DateTime getJourneyFrom() {

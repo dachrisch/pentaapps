@@ -22,9 +22,13 @@ import de.pentasys.zenal.builder.TimespanDateTime;
 public class CreateSeleniumCommandFromRexxJourneyTest {
 
     @Test
+    public void createExpenseCommands() throws Exception {
+    }
+
+    @Test
     public void createTripCommands() throws Exception {
-        final RexxTrip rexxTrip = new RexxTrip(from(datetime(2010, 1, 2, 10, 20)).till(datetime(2010, 1, 2, 20, 10)),
-                "projekteinsatz");
+        final RexxTrip rexxTrip = new RexxTrip(new TripCities("b", "c"), from(datetime(2010, 1, 2, 10, 20)).till(
+                datetime(2010, 1, 2, 20, 10)), "projekteinsatz");
         final Selenium seleniumMock = createStrictMock(Selenium.class);
         // trip
         seleniumMock.click("4");
@@ -40,7 +44,7 @@ public class CreateSeleniumCommandFromRexxJourneyTest {
 
         replay(seleniumMock);
 
-        new RexxTripsUpdater(seleniumMock, "b", "c").createTrips(Collections.singleton(rexxTrip));
+        new RexxTripsUpdater(seleniumMock).createTrips(Collections.singleton(rexxTrip));
 
         verify(seleniumMock);
     }
@@ -49,7 +53,7 @@ public class CreateSeleniumCommandFromRexxJourneyTest {
     public void createJourneyCommands() throws Exception {
         final RexxJourney rexxJourney = new RexxJourney(Project.MEDIASATURN, new TripCities("a", "b"),
                 new TimespanDateTime(new DateTime(2010, 1, 1, 10, 20, 0, 0), new DateTime(2010, 1, 2, 20, 10, 0, 0)),
-                new RexxTrip(new TimespanDateTime(null, null), null));
+                new RexxTrip(new TripCities(null, null), new TimespanDateTime(null, null), null));
         rexxJourney.getTrips().clear();
         final Selenium seleniumMock = createStrictMock(Selenium.class);
         // journey

@@ -1,7 +1,7 @@
 package de.pentasys.rexx;
 
-import static de.pentasys.rexx.builder.CostBuilder.taxi;
-import static de.pentasys.rexx.builder.CostBuilder.train;
+import static de.pentasys.rexx.builder.ExpenseBuilder.taxi;
+import static de.pentasys.rexx.builder.ExpenseBuilder.train;
 import static de.pentasys.rexx.builder.RexxJourneyBuilder.doJourney;
 import static de.pentasys.zenal.builder.DateTimeGenerator.from;
 import static de.pentasys.zenal.builder.ZenalEntryCreator.datetime;
@@ -14,8 +14,8 @@ import org.junit.Test;
 import de.pentasys.rexx.builder.RexxJourney;
 import de.pentasys.rexx.entities.RexxTrip;
 import de.pentasys.rexx.entities.TripCities;
-import de.pentasys.rexx.entities.costs.Payment;
-import de.pentasys.rexx.entities.costs.VoucherType;
+import de.pentasys.rexx.entities.expenses.Payment;
+import de.pentasys.rexx.entities.expenses.VoucherType;
 import de.pentasys.zenal.builder.Project;
 import de.pentasys.zenal.builder.TimespanDateTime;
 
@@ -43,7 +43,8 @@ public class FloatingApiRexxEntryTest {
 
     @Test
     public void createExpenseToTrip() throws Exception {
-        final RexxTrip trip = new RexxTrip(new TimespanDateTime(new DateTime().minusHours(8), new DateTime()), "bla");
+        final RexxTrip trip = new RexxTrip(new TripCities("a", "b"), new TimespanDateTime(new DateTime().minusHours(8),
+                new DateTime()), "bla");
         final RexxJourney rexxJourney = new RexxJourney(Project.MEDIASATURN, new TripCities("a", "b"),
                 new TimespanDateTime(new DateTime(), new DateTime()), trip);
 

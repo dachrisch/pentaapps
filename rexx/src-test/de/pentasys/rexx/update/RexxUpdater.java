@@ -15,8 +15,7 @@ public class RexxUpdater {
     public void createJourney(final RexxJourney rexxJourney) {
         gotoSpesenPage();
         createInlandJourney(rexxJourney);
-        new RexxTripsUpdater(selenium, rexxJourney.getLeavingCity(), rexxJourney.getArrivalCity())
-                .createTrips(rexxJourney.getTrips());
+        new RexxTripsUpdater(selenium).createTrips(rexxJourney.getTrips());
     }
 
     private void createInlandJourney(final RexxJourney rexxJourney) {
