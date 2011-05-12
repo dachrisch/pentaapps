@@ -1,11 +1,8 @@
 package de.pentasys.rexx.update;
 
-import java.util.SortedSet;
-
 import com.thoughtworks.selenium.Selenium;
 
 import de.pentasys.rexx.builder.RexxJourney;
-import de.pentasys.rexx.entities.RexxTrip;
 
 public class RexxUpdater {
 
@@ -18,23 +15,8 @@ public class RexxUpdater {
     public void createJourney(RexxJourney rexxJourney) {
         gotoSpesenPage();
         createInlandJourney(rexxJourney);
-        SortedSet<RexxTrip> trips = rexxJourney.getTrips();
-        for (RexxTrip rexxTrip : trips) {
-            createTrip(rexxJourney, rexxTrip);
-        }
-    }
-
-    private void createTrip(RexxJourney rexxJourney, RexxTrip trip) {
-        selenium.click("4");
-        selenium.type("4", trip.getReason());
-        selenium.type("1", rexxJourney.getLeavingCity());
-        selenium.type("3", rexxJourney.getArrivalCity());
-        selenium.type("7_time", trip.getFrom().toString("kk:mm"));
-        selenium.type("7_date", trip.getFrom().toString("dd.MM.YYYY"));
-        selenium.type("8_time", trip.getTill().toString("kk:mm"));
-        selenium.type("8_date", trip.getFrom().toString("dd.MM.YYYY"));
-        selenium.click("css=img[title=Speichern]");
-        selenium.waitForPageToLoad("30000");
+        new RexxTripsUpdater(selenium, rexxJourney.getLeavingCity(), rexxJourney.getArrivalCity())
+                .createTrips(rexxJourney.getTrips());
     }
 
     private void createInlandJourney(RexxJourney rexxJourney) {
