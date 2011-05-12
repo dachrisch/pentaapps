@@ -23,7 +23,9 @@ public class CreateSeleniumCommandFromRexxJourneyTest {
     public void createJourneyCommands() throws Exception {
         RexxJourney rexxJourney = new RexxJourney(Project.MEDIASATURN, new TripCities("a", "b"), new TimespanDateTime(
                 new DateTime(2010, 1, 1, 10, 20, 0, 0), new DateTime(2010, 1, 2, 20, 10, 0, 0)), new RexxTrip(from(
-                datetime(2010, 1, 1, 7, 50)).till(datetime(2010, 1, 1, 17, 50)), "projekteinsatz"));
+                datetime(2010, 1, 1, 10, 20)).till(datetime(2010, 1, 1, 20, 10)), "projekteinsatz"));
+
+        rexxJourney.withTrip(from(datetime(2010, 1, 2, 10, 20)).till(datetime(2010, 1, 2, 20, 10)), "projekteinsatz");
 
         final Selenium seleniumMock = createStrictMock(Selenium.class);
         // journey
@@ -40,14 +42,30 @@ public class CreateSeleniumCommandFromRexxJourneyTest {
         seleniumMock.click("css=img[title=Speichern]");
         seleniumMock.waitForPageToLoad("30000");
 
-        // trip
+        // trip #1
         seleniumMock.click("4");
         seleniumMock.type("4", "projekteinsatz");
         seleniumMock.type("1", "a");
         seleniumMock.type("3", "b");
-        seleniumMock.type("7_time", "07:50");
-        seleniumMock.type("8_time", "17:50");
+        seleniumMock.type("7_time", "10:20");
+        seleniumMock.type("7_date", "01.01.2010");
+        seleniumMock.type("8_time", "20:10");
+        seleniumMock.type("8_date", "01.01.2010");
         seleniumMock.click("css=img[title=Speichern]");
+        seleniumMock.waitForPageToLoad("30000");
+
+        // trip #2
+        seleniumMock.click("4");
+        seleniumMock.type("4", "projekteinsatz");
+        seleniumMock.type("1", "a");
+        seleniumMock.type("3", "b");
+        seleniumMock.type("7_time", "10:20");
+        seleniumMock.type("7_date", "02.01.2010");
+        seleniumMock.type("8_time", "20:10");
+        seleniumMock.type("8_date", "02.01.2010");
+        seleniumMock.click("css=img[title=Speichern]");
+        seleniumMock.waitForPageToLoad("30000");
+
         replay(seleniumMock);
 
         new RexxUpdater(seleniumMock).createJourney(rexxJourney);
