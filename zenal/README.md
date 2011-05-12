@@ -1,5 +1,8 @@
 Zenal Updater
 =============
+current status
+--------------
+early alpha
 
 usage
 -----
@@ -8,5 +11,4 @@ usage
 
 description
 -----------
-
 take a CSV time sheet (for example from toggl.com) and updates it on zenal
