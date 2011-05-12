@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>org.dachrisch.pentasys-webapps</groupId>
+		<artifactId>pentaparent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.dachrisch.pentasys-webapps</groupId>
+	<artifactId>zenal</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>org.dachrisch.pentasys-webapps.zenal</name>
+
+	<scm>
+		<connection>scm:git:git://github.com/dachrisch/Time-and-Expense.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:dachrisch/Time-and-Expense.git</developerConnection>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.webdriver</groupId>
+			<artifactId>webdriver-selenium</artifactId>
+			<version>0.9.7376</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.webdriver</groupId>
+			<artifactId>webdriver-firefox</artifactId>
+			<version>0.9.7376</version>
+		</dependency>
+		<dependency>
+			<groupId>org.dachrisch.pentasys-webapps</groupId>
+			<artifactId>selenium-addon</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.dachrisch.pentasys-webapps</groupId>
+			<artifactId>pentabase</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>3.0</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+</project>

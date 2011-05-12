@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>org.dachrisch.pentasys-webapps</groupId>
+		<artifactId>pentaparent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.dachrisch.pentasys-webapps</groupId>
+	<artifactId>selenium-addon</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>org.dachrisch.pentasys-webapps.selenium-addon</name>
+
+	<scm>
+		<connection>scm:git:git://github.com/dachrisch/Time-and-Expense.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:dachrisch/Time-and-Expense.git</developerConnection>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-remote-client</artifactId>
+			<version>2.0b1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<!-- WebDriverBackedSelenium -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>r09</version>
+		</dependency>
+	</dependencies>
+
+</project>
