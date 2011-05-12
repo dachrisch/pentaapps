@@ -26,9 +26,10 @@ public class RexxJourney {
 
     }
 
-    public RexxJourney doTrip(TimespanDateTime timeSpan, String reason) {
-        trips.add(new RexxTrip(timeSpan, reason));
-        return this;
+    public RexxTrip doTrip(TimespanDateTime timeSpan, String reason) {
+        RexxTrip rexxTrip = new RexxTrip(timeSpan, reason);
+        trips.add(rexxTrip);
+        return rexxTrip;
     }
 
     public String getLeavingCity() {
