@@ -7,7 +7,7 @@ import org.apache.commons.lang.builder.CompareToBuilder;
 import org.joda.time.DateTime;
 
 import de.pentasys.rexx.builder.ExpenseBuilder;
-import de.pentasys.rexx.entities.expenses.Amount;
+import de.pentasys.rexx.entities.expenses.Expense;
 import de.pentasys.zenal.builder.TimespanDateTime;
 
 public class RexxTrip implements Comparable<RexxTrip> {
@@ -15,7 +15,7 @@ public class RexxTrip implements Comparable<RexxTrip> {
     private final DateTime from;
     private final String reason;
     private final DateTime till;
-    private final List<Amount> costs = new ArrayList<Amount>();
+    private final List<Expense> costs = new ArrayList<Expense>();
     private final TripCities tripCities;
 
     public RexxTrip(final TripCities tripCities, final TimespanDateTime timeSpan, final String reason) {
@@ -38,10 +38,10 @@ public class RexxTrip implements Comparable<RexxTrip> {
     }
 
     public ExpenseBuilder with() {
-        return new ExpenseBuilder(costs);
+        return new ExpenseBuilder(costs, from, till);
     }
 
-    public List<Amount> getCosts() {
+    public List<Expense> getCosts() {
         return costs;
     }
 

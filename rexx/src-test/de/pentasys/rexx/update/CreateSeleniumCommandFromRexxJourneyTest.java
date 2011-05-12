@@ -16,13 +16,63 @@ import com.thoughtworks.selenium.Selenium;
 import de.pentasys.rexx.builder.RexxJourney;
 import de.pentasys.rexx.entities.RexxTrip;
 import de.pentasys.rexx.entities.TripCities;
+import de.pentasys.rexx.entities.expenses.Expense;
+import de.pentasys.rexx.entities.expenses.Payment;
+import de.pentasys.rexx.entities.expenses.TaxiExpense;
+import de.pentasys.rexx.entities.expenses.TrainExpense;
 import de.pentasys.zenal.builder.Project;
 import de.pentasys.zenal.builder.TimespanDateTime;
 
 public class CreateSeleniumCommandFromRexxJourneyTest {
-
     @Test
-    public void createExpenseCommands() throws Exception {
+    public void createTaxiExpenseCommands() throws Exception {
+
+        TaxiExpense amount = new TaxiExpense(12.99, Payment.CASH);
+        DateTime issueDate = new DateTime();
+        amount.setIssueDate(issueDate);
+        final Selenium seleniumMock = createStrictMock(Selenium.class);
+        
+        seleniumMock.click("css=img[title=Neuen Beleg anlegen]");
+        seleniumMock.waitForPageToLoad("30000");
+        seleniumMock.select("6", "label=Taxi bis 50 km");
+        seleniumMock.waitForPageToLoad("30000");
+        seleniumMock.type("34_date", issueDate.toString("dd.MM.YYYY"));
+        seleniumMock.type("34_time", issueDate.toString("kk:mm"));
+        seleniumMock.type("9", "12.99");
+        seleniumMock.select("18", "label=Bar");
+     
+        seleniumMock.click("css=img[title=Speichern]");
+        seleniumMock.waitForPageToLoad("30000");
+        replay(seleniumMock);
+        
+        new ExpenseUpdater(seleniumMock).createExpenses(Collections.singletonList((Expense)amount));
+
+        verify(seleniumMock);
+    }
+    @Test
+    public void createTrainExpenseCommands() throws Exception {
+
+        TrainExpense amount = new TrainExpense(14.99, Payment.CREDIT);
+        DateTime issueDate = new DateTime();
+        amount.setIssueDate(issueDate);
+        final Selenium seleniumMock = createStrictMock(Selenium.class);
+        
+        seleniumMock.click("css=img[title=Neuen Beleg anlegen]");
+        seleniumMock.waitForPageToLoad("30000");
+        seleniumMock.select("6", "label=Öffentliche Verkehrsmittel über 50 KM");
+        seleniumMock.waitForPageToLoad("30000");
+        seleniumMock.type("34_date", issueDate.toString("dd.MM.YYYY"));
+        seleniumMock.type("34_time", issueDate.toString("kk:mm"));
+        seleniumMock.type("9", "14.99");
+        seleniumMock.select("18", "label=Firmenkreditkarte");
+     
+        seleniumMock.click("css=img[title=Speichern]");
+        seleniumMock.waitForPageToLoad("30000");
+        replay(seleniumMock);
+        
+        new ExpenseUpdater(seleniumMock).createExpenses(Collections.singletonList((Expense)amount));
+
+        verify(seleniumMock);
     }
 
     @Test

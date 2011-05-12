@@ -43,10 +43,12 @@ public class FloatingApiRexxEntryTest {
 
     @Test
     public void createExpenseToTrip() throws Exception {
-        final RexxTrip trip = new RexxTrip(new TripCities("a", "b"), new TimespanDateTime(new DateTime().minusHours(8),
-                new DateTime()), "bla");
+        DateTime tripEndDate = new DateTime();
+        DateTime tripStartDate = tripEndDate.minusHours(8);
+        final RexxTrip trip = new RexxTrip(new TripCities("a", "b"), new TimespanDateTime(tripStartDate,
+                tripEndDate), "bla");
         final RexxJourney rexxJourney = new RexxJourney(Project.MEDIASATURN, new TripCities("a", "b"),
-                new TimespanDateTime(new DateTime(), new DateTime()), trip);
+                new TimespanDateTime(tripEndDate, tripEndDate), trip);
 
         trip.with().inboundCosts(train(12.50, Payment.CREDIT)).outboundCosts(train(12.50, Payment.CREDIT));
         trip.with().inboundCosts(taxi(14., Payment.CASH)).outboundCosts(taxi(14., Payment.CASH));
@@ -55,7 +57,9 @@ public class FloatingApiRexxEntryTest {
         assertThat(rexxJourney.getTrips().first().getCosts().size(), is(4));
         assertThat(rexxJourney.getTrips().first().getCosts().get(0).getAmount(), is(12.5));
         assertThat(rexxJourney.getTrips().first().getCosts().get(0).getVoucherType(), is(VoucherType.PUBLIC_TRANSPORT));
+        assertThat(rexxJourney.getTrips().first().getCosts().get(0).getIssueDate(), is(tripStartDate));
         assertThat(rexxJourney.getTrips().first().getCosts().get(1).getPayment(), is(Payment.CREDIT));
+        assertThat(rexxJourney.getTrips().first().getCosts().get(1).getIssueDate(), is(tripEndDate));
 
         assertThat(rexxJourney.getTrips().first().getCosts().get(2).getAmount(), is(14.));
         assertThat(rexxJourney.getTrips().first().getCosts().get(2).getVoucherType(), is(VoucherType.TAXI));
