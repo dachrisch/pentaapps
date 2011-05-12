@@ -7,5 +7,7 @@
 	<classpathentry kind="lib" path="/zenal/lib/junit-dep-4.8.1.jar"/>
 	<classpathentry kind="lib" path="/zenal/lib/guava-r08.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/zenal"/>
+	<classpathentry kind="lib" path="/zenal/lib/easymock-3.0.jar"/>
+	<classpathentry kind="lib" path="/zenal/lib/joda-time-1.6.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

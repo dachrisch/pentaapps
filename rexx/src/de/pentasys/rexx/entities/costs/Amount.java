@@ -1,6 +1,5 @@
 package de.pentasys.rexx.entities.costs;
 
-import de.pentasys.rexx.update.Payment;
 
 public abstract class Amount {
 
