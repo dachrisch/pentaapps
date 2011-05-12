@@ -22,7 +22,7 @@ public class ExpenseBuilder {
     private final DateTime inboundDate;
     private final DateTime outboundDate;
 
-    public ExpenseBuilder(final List<Expense> expenses, DateTime inboundDate, DateTime outboundDate) {
+    public ExpenseBuilder(final List<Expense> expenses, final DateTime inboundDate, final DateTime outboundDate) {
         this.expenses = expenses;
         this.inboundDate = inboundDate;
         this.outboundDate = outboundDate;

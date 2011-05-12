@@ -10,17 +10,17 @@ public class ExpenseUpdater {
 
     private final Selenium selenium;
 
-    public ExpenseUpdater(Selenium selenium) {
+    public ExpenseUpdater(final Selenium selenium) {
         this.selenium = selenium;
     }
 
-    public void createExpenses(List<Expense> expenses) {
-        for (Expense amount : expenses) {
+    public void createExpenses(final List<Expense> expenses) {
+        for (final Expense amount : expenses) {
             createExpense(amount);
         }
     }
 
-    private void createExpense(Expense expense) {
+    private void createExpense(final Expense expense) {
         selenium.click("css=img[title=Neuen Beleg anlegen]");
         selenium.waitForPageToLoad("30000");
         selenium.select("6", String.format("label=%s", expense.getVoucherType().getVoucherType()));

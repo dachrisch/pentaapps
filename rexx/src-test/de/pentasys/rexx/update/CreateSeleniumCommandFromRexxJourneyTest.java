@@ -27,11 +27,11 @@ public class CreateSeleniumCommandFromRexxJourneyTest {
     @Test
     public void createTaxiExpenseCommands() throws Exception {
 
-        TaxiExpense amount = new TaxiExpense(12.99, Payment.CASH);
-        DateTime issueDate = new DateTime();
+        final TaxiExpense amount = new TaxiExpense(12.99, Payment.CASH);
+        final DateTime issueDate = new DateTime();
         amount.setIssueDate(issueDate);
         final Selenium seleniumMock = createStrictMock(Selenium.class);
-        
+
         seleniumMock.click("css=img[title=Neuen Beleg anlegen]");
         seleniumMock.waitForPageToLoad("30000");
         seleniumMock.select("6", "label=Taxi bis 50 km");
@@ -40,23 +40,24 @@ public class CreateSeleniumCommandFromRexxJourneyTest {
         seleniumMock.type("34_time", issueDate.toString("kk:mm"));
         seleniumMock.type("9", "12.99");
         seleniumMock.select("18", "label=Bar");
-     
+
         seleniumMock.click("css=img[title=Speichern]");
         seleniumMock.waitForPageToLoad("30000");
         replay(seleniumMock);
-        
-        new ExpenseUpdater(seleniumMock).createExpenses(Collections.singletonList((Expense)amount));
+
+        new ExpenseUpdater(seleniumMock).createExpenses(Collections.singletonList((Expense) amount));
 
         verify(seleniumMock);
     }
+
     @Test
     public void createTrainExpenseCommands() throws Exception {
 
-        TrainExpense amount = new TrainExpense(14.99, Payment.CREDIT);
-        DateTime issueDate = new DateTime();
+        final TrainExpense amount = new TrainExpense(14.99, Payment.CREDIT);
+        final DateTime issueDate = new DateTime();
         amount.setIssueDate(issueDate);
         final Selenium seleniumMock = createStrictMock(Selenium.class);
-        
+
         seleniumMock.click("css=img[title=Neuen Beleg anlegen]");
         seleniumMock.waitForPageToLoad("30000");
         seleniumMock.select("6", "label=Öffentliche Verkehrsmittel über 50 KM");
@@ -65,12 +66,12 @@ public class CreateSeleniumCommandFromRexxJourneyTest {
         seleniumMock.type("34_time", issueDate.toString("kk:mm"));
         seleniumMock.type("9", "14.99");
         seleniumMock.select("18", "label=Firmenkreditkarte");
-     
+
         seleniumMock.click("css=img[title=Speichern]");
         seleniumMock.waitForPageToLoad("30000");
         replay(seleniumMock);
-        
-        new ExpenseUpdater(seleniumMock).createExpenses(Collections.singletonList((Expense)amount));
+
+        new ExpenseUpdater(seleniumMock).createExpenses(Collections.singletonList((Expense) amount));
 
         verify(seleniumMock);
     }

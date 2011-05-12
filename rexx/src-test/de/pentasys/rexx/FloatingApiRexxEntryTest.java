@@ -43,10 +43,10 @@ public class FloatingApiRexxEntryTest {
 
     @Test
     public void createExpenseToTrip() throws Exception {
-        DateTime tripEndDate = new DateTime();
-        DateTime tripStartDate = tripEndDate.minusHours(8);
-        final RexxTrip trip = new RexxTrip(new TripCities("a", "b"), new TimespanDateTime(tripStartDate,
-                tripEndDate), "bla");
+        final DateTime tripEndDate = new DateTime();
+        final DateTime tripStartDate = tripEndDate.minusHours(8);
+        final RexxTrip trip = new RexxTrip(new TripCities("a", "b"), new TimespanDateTime(tripStartDate, tripEndDate),
+                "bla");
         final RexxJourney rexxJourney = new RexxJourney(Project.MEDIASATURN, new TripCities("a", "b"),
                 new TimespanDateTime(tripEndDate, tripEndDate), trip);
 

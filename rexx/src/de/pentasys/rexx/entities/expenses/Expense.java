@@ -31,7 +31,7 @@ public abstract class Expense {
         return issueDate;
     }
 
-    public void setIssueDate(DateTime issueDate) {
+    public void setIssueDate(final DateTime issueDate) {
         this.issueDate = issueDate;
     }
 
