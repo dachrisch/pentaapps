@@ -19,26 +19,28 @@ public class RexxJourney {
     private final Project project;
     private final TreeSet<RexxTrip> trips = new TreeSet<RexxTrip>();
 
-    RexxJourney(Project project, TripCities tripCities, TimespanDateTime timespanDateTime) {
+    RexxJourney(final Project project, final TripCities tripCities, final TimespanDateTime timespanDateTime) {
         this.project = project;
-        this.leavingCity = tripCities.getLeavingCity();
-        this.arrivalCity = tripCities.getArrivalCity();
+        leavingCity = tripCities.getLeavingCity();
+        arrivalCity = tripCities.getArrivalCity();
         journeyFrom = timespanDateTime.getFrom();
         journeyTill = timespanDateTime.getTill();
     }
 
-    public RexxJourney(Project project, TripCities tripCities, TimespanDateTime timespanDateTime, RexxTrip rexxTrip) {
+    public RexxJourney(final Project project, final TripCities tripCities, final TimespanDateTime timespanDateTime,
+            final RexxTrip rexxTrip) {
         this.project = project;
-        this.leavingCity = tripCities.getLeavingCity();
-        this.arrivalCity = tripCities.getArrivalCity();
+        leavingCity = tripCities.getLeavingCity();
+        arrivalCity = tripCities.getArrivalCity();
         journeyFrom = timespanDateTime.getFrom();
         journeyTill = timespanDateTime.getTill();
-        if (null == rexxTrip)
+        if (null == rexxTrip) {
             throw new IllegalArgumentException("at least one trip needed");
+        }
         trips.add(rexxTrip);
     }
 
-    public RexxJourney withTrip(TimespanDateTime timeSpan, String reason) {
+    public RexxJourney withTrip(final TimespanDateTime timeSpan, final String reason) {
         trips.add(new RexxTrip(timeSpan, reason));
         return this;
     }
@@ -60,7 +62,7 @@ public class RexxJourney {
     }
 
     public Project getProject() {
-        return this.project;
+        return project;
     }
 
     public SortedSet<RexxTrip> getTrips() {

@@ -1,13 +1,12 @@
 package de.pentasys.rexx.entities.costs;
 
-
 public abstract class Amount {
 
     private final double amount;
     private final Payment payment;
     private final VoucherType voucherType;
 
-    public Amount(double amount, Payment payment, VoucherType voucherType) {
+    public Amount(final double amount, final Payment payment, final VoucherType voucherType) {
         this.amount = amount;
         this.payment = payment;
         this.voucherType = voucherType;

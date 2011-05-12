@@ -6,7 +6,7 @@ import de.pentasys.rexx.entities.costs.VoucherType;
 
 public class TaxiAmount extends Amount {
 
-    public TaxiAmount(double amount, Payment payment) {
+    public TaxiAmount(final double amount, final Payment payment) {
         super(amount, payment, VoucherType.TAXI);
     }
 

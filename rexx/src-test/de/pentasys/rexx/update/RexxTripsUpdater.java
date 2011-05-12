@@ -12,19 +12,19 @@ public class RexxTripsUpdater {
     private final String leavingCity;
     private final String arrivalCity;
 
-    public RexxTripsUpdater(Selenium selenium, String leavingCity, String arrivalCity) {
+    public RexxTripsUpdater(final Selenium selenium, final String leavingCity, final String arrivalCity) {
         this.selenium = selenium;
         this.leavingCity = leavingCity;
         this.arrivalCity = arrivalCity;
     }
 
-    public void createTrips(Set<RexxTrip> trips) {
-        for (RexxTrip rexxTrip : trips) {
+    public void createTrips(final Set<RexxTrip> trips) {
+        for (final RexxTrip rexxTrip : trips) {
             createTrip(rexxTrip);
         }
     }
 
-    private void createTrip(RexxTrip trip) {
+    private void createTrip(final RexxTrip trip) {
         selenium.click("4");
         selenium.type("4", trip.getReason());
         selenium.type("1", leavingCity);

@@ -15,16 +15,16 @@ public class RexxTrip implements Comparable<RexxTrip> {
     private final DateTime from;
     private final String reason;
     private final DateTime till;
-    private List<Amount> costs = new ArrayList<Amount>();
+    private final List<Amount> costs = new ArrayList<Amount>();
 
-    public RexxTrip(TimespanDateTime timeSpan, String reason) {
+    public RexxTrip(final TimespanDateTime timeSpan, final String reason) {
         from = timeSpan.getFrom();
         till = timeSpan.getTill();
         this.reason = reason;
     }
 
     public DateTime getFrom() {
-        return this.from;
+        return from;
     }
 
     public String getReason() {
@@ -44,7 +44,7 @@ public class RexxTrip implements Comparable<RexxTrip> {
     }
 
     @Override
-    public int compareTo(RexxTrip other) {
+    public int compareTo(final RexxTrip other) {
         return CompareToBuilder.reflectionCompare(this, other);
     }
 }

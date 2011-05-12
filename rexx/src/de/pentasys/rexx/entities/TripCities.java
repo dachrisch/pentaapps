@@ -13,7 +13,7 @@ public class TripCities {
         return arrivalCity;
     }
 
-    public TripCities(String leavingCity, String arrivalCity) {
+    public TripCities(final String leavingCity, final String arrivalCity) {
         this.leavingCity = leavingCity;
         this.arrivalCity = arrivalCity;
     }

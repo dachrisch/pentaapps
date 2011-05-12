@@ -8,7 +8,7 @@ import de.pentasys.zenal.builder.TimespanDateTime;
 
 public class RexxJourneyBuilder {
 
-    public static RexxJourneyBuilder doJourney(Project project) {
+    public static RexxJourneyBuilder doJourney(final Project project) {
         return new RexxJourneyBuilder(project);
     }
 
@@ -19,31 +19,31 @@ public class RexxJourneyBuilder {
     private final Project project;
     private RexxJourney rexxJourney;
 
-    public RexxJourneyBuilder(Project project) {
+    public RexxJourneyBuilder(final Project project) {
         this.project = project;
     }
 
-    public StartCityBuilder starting(DateTime startDate) {
+    public StartCityBuilder starting(final DateTime startDate) {
         this.startDate = startDate;
         return new StartCityBuilder(this);
     }
 
-    void till(DateTime tillDate) {
+    void till(final DateTime tillDate) {
         this.tillDate = tillDate;
 
     }
 
-    void arrivalCity(String arrivalCity) {
+    void arrivalCity(final String arrivalCity) {
         this.arrivalCity = arrivalCity;
 
     }
 
-    void leavingCity(String leavingCity) {
+    void leavingCity(final String leavingCity) {
         this.leavingCity = leavingCity;
 
     }
 
-    public RexxJourney withTrip(TimespanDateTime timeSpan, String reason) {
+    public RexxJourney withTrip(final TimespanDateTime timeSpan, final String reason) {
         if (null == rexxJourney) {
             rexxJourney = new RexxJourney(project, new TripCities(leavingCity, arrivalCity), new TimespanDateTime(
                     startDate, tillDate));

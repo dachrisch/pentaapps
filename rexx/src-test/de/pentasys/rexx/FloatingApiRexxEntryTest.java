@@ -23,8 +23,8 @@ public class FloatingApiRexxEntryTest {
 
     @Test
     public void createInlandTrip() throws Exception {
-        RexxJourney rexxJourney = doJourney(Project.MEDIASATURN).starting(datetime(2011, 5, 5, 7, 50)).from("München")
-                .till(datetime(2011, 5, 15, 17, 50)).to("Ingolstadt")
+        final RexxJourney rexxJourney = doJourney(Project.MEDIASATURN).starting(datetime(2011, 5, 5, 7, 50))
+                .from("München").till(datetime(2011, 5, 15, 17, 50)).to("Ingolstadt")
                 .withTrip(from(datetime(2011, 5, 5, 7, 50)).till(datetime(2011, 5, 15, 17, 50)), "projekteinsatz");
 
         assertThat(rexxJourney.getLeavingCity(), is("München"));
@@ -43,12 +43,10 @@ public class FloatingApiRexxEntryTest {
 
     @Test
     public void createExpenseToTrip() throws Exception {
-        RexxTrip trip = new RexxTrip(new TimespanDateTime(new DateTime().minusHours(8),
-        new DateTime()), "bla");
-        RexxJourney rexxJourney = new RexxJourney(Project.MEDIASATURN, new TripCities("a", "b"), new TimespanDateTime(
-                new DateTime(), new DateTime()), trip);
-        
-        
+        final RexxTrip trip = new RexxTrip(new TimespanDateTime(new DateTime().minusHours(8), new DateTime()), "bla");
+        final RexxJourney rexxJourney = new RexxJourney(Project.MEDIASATURN, new TripCities("a", "b"),
+                new TimespanDateTime(new DateTime(), new DateTime()), trip);
+
         trip.with().inboundCosts(train(12.50, Payment.CREDIT)).outboundCosts(train(12.50, Payment.CREDIT));
         trip.with().inboundCosts(taxi(14., Payment.CASH)).outboundCosts(taxi(14., Payment.CASH));
 

@@ -8,18 +8,18 @@ public class RexxUpdater {
 
     private final Selenium selenium;
 
-    public RexxUpdater(Selenium selenium) {
+    public RexxUpdater(final Selenium selenium) {
         this.selenium = selenium;
     }
 
-    public void createJourney(RexxJourney rexxJourney) {
+    public void createJourney(final RexxJourney rexxJourney) {
         gotoSpesenPage();
         createInlandJourney(rexxJourney);
         new RexxTripsUpdater(selenium, rexxJourney.getLeavingCity(), rexxJourney.getArrivalCity())
                 .createTrips(rexxJourney.getTrips());
     }
 
-    private void createInlandJourney(RexxJourney rexxJourney) {
+    private void createInlandJourney(final RexxJourney rexxJourney) {
         selenium.click("css=img[title=Inlandsreise]");
         selenium.waitForPageToLoad("30000");
 
