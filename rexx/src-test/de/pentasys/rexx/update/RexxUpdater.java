@@ -2,7 +2,7 @@ package de.pentasys.rexx.update;
 
 import com.thoughtworks.selenium.Selenium;
 
-import de.pentasys.rexx.entities.RexxJourney;
+import de.pentasys.rexx.builder.RexxJourney;
 
 public class RexxUpdater {
 

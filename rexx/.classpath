@@ -9,5 +9,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/zenal"/>
 	<classpathentry kind="lib" path="/zenal/lib/easymock-3.0.jar"/>
 	<classpathentry kind="lib" path="/zenal/lib/joda-time-1.6.2.jar"/>
+	<classpathentry kind="lib" path="/zenal/lib/commons-lang-2.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

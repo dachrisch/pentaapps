@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
-import de.pentasys.rexx.entities.RexxJourney;
+import de.pentasys.rexx.builder.RexxJourney;
 import de.pentasys.rexx.entities.RexxTrip;
 import de.pentasys.rexx.entities.TripCities;
 import de.pentasys.rexx.entities.costs.Payment;
@@ -24,8 +24,8 @@ public class FloatingApiRexxEntryTest {
     @Test
     public void createInlandTrip() throws Exception {
         RexxJourney rexxJourney = doJourney(Project.MEDIASATURN).starting(datetime(2011, 5, 5, 7, 50)).from("München")
-                .till(datetime(2011, 5, 15, 17, 50)).to("Ingolstadt");
-        rexxJourney.doTrip(from(datetime(2011, 5, 5, 7, 50)).till(datetime(2011, 5, 15, 17, 50)), "projekteinsatz");
+                .till(datetime(2011, 5, 15, 17, 50)).to("Ingolstadt")
+                .doTrip(from(datetime(2011, 5, 5, 7, 50)).till(datetime(2011, 5, 15, 17, 50)), "projekteinsatz");
 
         assertThat(rexxJourney.getLeavingCity(), is("München"));
         assertThat(rexxJourney.getArrivalCity(), is("Ingolstadt"));
@@ -43,9 +43,12 @@ public class FloatingApiRexxEntryTest {
 
     @Test
     public void createExpenseToTrip() throws Exception {
+        RexxTrip trip = new RexxTrip(new TimespanDateTime(new DateTime().minusHours(8),
+        new DateTime()), "bla");
         RexxJourney rexxJourney = new RexxJourney(Project.MEDIASATURN, new TripCities("a", "b"), new TimespanDateTime(
-                new DateTime(), new DateTime()));
-        RexxTrip trip = rexxJourney.doTrip(new TimespanDateTime(new DateTime().minusHours(8), new DateTime()), "bla");
+                new DateTime(), new DateTime()), trip);
+        
+        
         trip.with().inboundCosts(train(12.50, Payment.CREDIT)).outboundCosts(train(12.50, Payment.CREDIT));
         trip.with().inboundCosts(taxi(14., Payment.CASH)).outboundCosts(taxi(14., Payment.CASH));
 

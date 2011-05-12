@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import com.thoughtworks.selenium.Selenium;
 
-import de.pentasys.rexx.entities.RexxJourney;
+import de.pentasys.rexx.builder.RexxJourney;
 import de.pentasys.rexx.entities.TripCities;
 import de.pentasys.zenal.builder.Project;
 import de.pentasys.zenal.builder.TimespanDateTime;
@@ -19,7 +19,7 @@ public class CreateSeleniumCommandFromRexxJourneyTest {
     @Test
     public void createJourneyCommands() throws Exception {
         RexxJourney rexxJourney = new RexxJourney(Project.MEDIASATURN, new TripCities("a", "b"), new TimespanDateTime(
-                new DateTime(2010,1,1,10,20,0,0), new DateTime(2010,1,2,20,10,0,0)));
+                new DateTime(2010, 1, 1, 10, 20, 0, 0), new DateTime(2010, 1, 2, 20, 10, 0, 0)), null);
 
         final Selenium seleniumMock = createStrictMock(Selenium.class);
         seleniumMock.open("/");

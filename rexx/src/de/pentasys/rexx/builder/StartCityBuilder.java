@@ -1,5 +1,6 @@
 package de.pentasys.rexx.builder;
 
+
 public class StartCityBuilder {
 
     private final RexxJourneyBuilder rexxJourneyCreator;

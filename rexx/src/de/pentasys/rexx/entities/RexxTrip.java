@@ -3,13 +3,14 @@ package de.pentasys.rexx.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.builder.CompareToBuilder;
 import org.joda.time.DateTime;
 
 import de.pentasys.rexx.builder.CostBuilder;
 import de.pentasys.rexx.entities.costs.Amount;
 import de.pentasys.zenal.builder.TimespanDateTime;
 
-public class RexxTrip {
+public class RexxTrip implements Comparable<RexxTrip> {
 
     private final DateTime from;
     private final String reason;
@@ -40,5 +41,10 @@ public class RexxTrip {
 
     public List<Amount> getCosts() {
         return costs;
+    }
+
+    @Override
+    public int compareTo(RexxTrip other) {
+        return CompareToBuilder.reflectionCompare(this, other);
     }
 }

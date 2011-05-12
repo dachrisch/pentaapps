@@ -1,10 +1,12 @@
-package de.pentasys.rexx.entities;
+package de.pentasys.rexx.builder;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.joda.time.DateTime;
 
+import de.pentasys.rexx.entities.RexxTrip;
+import de.pentasys.rexx.entities.TripCities;
 import de.pentasys.zenal.builder.Project;
 import de.pentasys.zenal.builder.TimespanDateTime;
 
@@ -17,19 +19,25 @@ public class RexxJourney {
     private final Project project;
     private final TreeSet<RexxTrip> trips = new TreeSet<RexxTrip>();
 
-    public RexxJourney(Project project, TripCities tripCities, TimespanDateTime timespanDateTime) {
+    RexxJourney(Project project, TripCities tripCities, TimespanDateTime timespanDateTime) {
         this.project = project;
         this.leavingCity = tripCities.getLeavingCity();
         this.arrivalCity = tripCities.getArrivalCity();
         journeyFrom = timespanDateTime.getFrom();
         journeyTill = timespanDateTime.getTill();
-
     }
 
-    public RexxTrip doTrip(TimespanDateTime timeSpan, String reason) {
-        RexxTrip rexxTrip = new RexxTrip(timeSpan, reason);
+    public RexxJourney(Project project, TripCities tripCities, TimespanDateTime timespanDateTime, RexxTrip rexxTrip) {
+        this.project = project;
+        this.leavingCity = tripCities.getLeavingCity();
+        this.arrivalCity = tripCities.getArrivalCity();
+        journeyFrom = timespanDateTime.getFrom();
+        journeyTill = timespanDateTime.getTill();
+        addTrip(rexxTrip);
+    }
+
+    public void addTrip(RexxTrip rexxTrip) {
         trips.add(rexxTrip);
-        return rexxTrip;
     }
 
     public String getLeavingCity() {
@@ -55,4 +63,5 @@ public class RexxJourney {
     public SortedSet<RexxTrip> getTrips() {
         return trips;
     }
+
 }

@@ -2,7 +2,7 @@ package de.pentasys.rexx.builder;
 
 import org.joda.time.DateTime;
 
-import de.pentasys.rexx.entities.RexxJourney;
+import de.pentasys.rexx.entities.RexxTrip;
 import de.pentasys.rexx.entities.TripCities;
 import de.pentasys.zenal.builder.Project;
 import de.pentasys.zenal.builder.TimespanDateTime;
@@ -18,6 +18,7 @@ public class RexxJourneyBuilder {
     private DateTime tillDate;
     private DateTime startDate;
     private final Project project;
+    private RexxJourney rexxJourney;
 
     public RexxJourneyBuilder(Project project) {
         this.project = project;
@@ -43,9 +44,14 @@ public class RexxJourneyBuilder {
 
     }
 
-    RexxJourney createJourney() {
-        return new RexxJourney(project, new TripCities(leavingCity, arrivalCity), new TimespanDateTime(startDate,
-                tillDate));
+    public RexxJourney withTrip(RexxTrip rexxTrip) {
+        if (null == rexxJourney) {
+            rexxJourney = new RexxJourney(project, new TripCities(leavingCity, arrivalCity), new TimespanDateTime(
+                    startDate, tillDate));
+        }
+        rexxJourney.addTrip(rexxTrip);
+
+        return rexxJourney;
     }
 
 }
