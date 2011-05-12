@@ -5,15 +5,12 @@ this project provides some utilities for accessing timesheet and expense web app
 
 REXX
 ----
-
 online expense handling
 
 selenium-addon
 --------------
-
 some utilities for easier handling with Selenium API
 
 ZENAL
 -----
-
 online timesheet handling
