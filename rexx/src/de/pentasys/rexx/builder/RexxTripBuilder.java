@@ -1,6 +1,5 @@
 package de.pentasys.rexx.builder;
 
-import de.pentasys.rexx.entities.RexxTrip;
 import de.pentasys.zenal.builder.TimespanDateTime;
 
 public class RexxTripBuilder {
@@ -11,8 +10,8 @@ public class RexxTripBuilder {
         this.rexxJourneyBuilder = rexxJourneyBuilder;
     }
 
-    public RexxJourney doTrip(TimespanDateTime timeSpan, String reason) {
-        return rexxJourneyBuilder.withTrip(new RexxTrip(timeSpan, reason));
+    public RexxJourney withTrip(TimespanDateTime timeSpan, String reason) {
+        return rexxJourneyBuilder.withTrip(timeSpan, reason);
     }
 
 }

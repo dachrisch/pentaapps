@@ -33,11 +33,14 @@ public class RexxJourney {
         this.arrivalCity = tripCities.getArrivalCity();
         journeyFrom = timespanDateTime.getFrom();
         journeyTill = timespanDateTime.getTill();
-        addTrip(rexxTrip);
+        if (null == rexxTrip)
+            throw new IllegalArgumentException("at least one trip needed");
+        trips.add(rexxTrip);
     }
 
-    public void addTrip(RexxTrip rexxTrip) {
-        trips.add(rexxTrip);
+    public RexxJourney withTrip(TimespanDateTime timeSpan, String reason) {
+        trips.add(new RexxTrip(timeSpan, reason));
+        return this;
     }
 
     public String getLeavingCity() {

@@ -25,7 +25,7 @@ public class FloatingApiRexxEntryTest {
     public void createInlandTrip() throws Exception {
         RexxJourney rexxJourney = doJourney(Project.MEDIASATURN).starting(datetime(2011, 5, 5, 7, 50)).from("München")
                 .till(datetime(2011, 5, 15, 17, 50)).to("Ingolstadt")
-                .doTrip(from(datetime(2011, 5, 5, 7, 50)).till(datetime(2011, 5, 15, 17, 50)), "projekteinsatz");
+                .withTrip(from(datetime(2011, 5, 5, 7, 50)).till(datetime(2011, 5, 15, 17, 50)), "projekteinsatz");
 
         assertThat(rexxJourney.getLeavingCity(), is("München"));
         assertThat(rexxJourney.getArrivalCity(), is("Ingolstadt"));
