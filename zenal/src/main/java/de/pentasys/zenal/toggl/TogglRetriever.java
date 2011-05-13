@@ -1,7 +1,9 @@
 package de.pentasys.zenal.toggl;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +18,10 @@ public class TogglRetriever {
     public List<ZenalEntry> readEntriesFromCsv(final String fileLocation) {
         CSVReader csvReader;
         try {
-            csvReader = new CSVReader(new FileReader(fileLocation), ',');
+            csvReader = new CSVReader(new InputStreamReader(new FileInputStream(fileLocation), "utf-8"), ',');
         } catch (final FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
 

@@ -8,6 +8,10 @@
 	<packaging>pom</packaging>
 	<name>org.dachrisch.pentasys-webapps.pentaparent</name>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
 	<scm>
 		<connection>scm:git:git://github.com/dachrisch/Time-and-Expense.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com:dachrisch/Time-and-Expense.git</developerConnection>
@@ -35,6 +39,7 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
 		</plugins>
