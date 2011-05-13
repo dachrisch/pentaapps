@@ -5,8 +5,8 @@ import static de.pentasys.zenal.selenium.setup.SeleniumSetup.createSeleniumInsta
 import java.io.Console;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.thoughtworks.selenium.Selenium;
 import com.thoughtworks.selenium.SeleniumException;
@@ -17,7 +17,7 @@ import de.pentasys.zenal.toggl.TogglRetriever;
 
 public class ZenalUpdater extends SeleniumBase {
 
-    protected static Log log = LogFactory.getLog(ZenalUpdater.class);
+    private static Logger log = LoggerFactory.getLogger(ZenalUpdater.class);
 
     public ZenalUpdater(final Selenium selenium) {
         super(selenium);
@@ -67,7 +67,7 @@ public class ZenalUpdater extends SeleniumBase {
         final List<ZenalEntry> entriesFromCsv = new TogglRetriever().readEntriesFromCsv(csvLocation);
 
         log.info(String.format("read %d entries from [%s]...now updating", entriesFromCsv.size(), csvLocation));
-        log.info(entriesFromCsv);
+        log.debug(entriesFromCsv.toString());
 
         log.info("pre-starting selenium");
         final Selenium selenium = createSeleniumInstance("https://zenal.pentasys.de");
