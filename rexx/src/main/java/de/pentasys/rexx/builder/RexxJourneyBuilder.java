@@ -29,8 +29,11 @@ public class RexxJourneyBuilder {
     }
 
     void till(final DateTime tillDate) {
+        if (tillDate.isBefore(startDate)) {
+            throw new IllegalArgumentException(String.format("till [%s] cannot be before start [%s]", tillDate,
+                    startDate));
+        }
         this.tillDate = tillDate;
-
     }
 
     void arrivalCity(final String arrivalCity) {
