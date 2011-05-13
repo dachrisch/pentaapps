@@ -11,7 +11,7 @@ public class StartSeleniumWithoutUpdateLiveTest {
 
     @Test
     public void startSeleniumInOrderToCheckClasspath() throws Exception {
-        WebDriverBackedSelenium selenium = createSeleniumInstance("http://localhost");
+        final WebDriverBackedSelenium selenium = createSeleniumInstance("http://localhost");
 
         assertThat(selenium, notNullValue());
 
