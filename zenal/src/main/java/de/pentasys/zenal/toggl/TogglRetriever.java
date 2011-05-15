@@ -1,23 +1,26 @@
 package de.pentasys.zenal.toggl;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.ArrayList;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.bean.CsvToBean;
 import au.com.bytecode.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
-import de.pentasys.zenal.ZenalEntry;
+import de.pentasys.zenal.ZenalEntryList;
 
 public class TogglRetriever {
 
-    public List<ZenalEntry> readEntriesFromCsv(final String fileLocation) {
+    public ZenalEntryList readEntriesFromCsv(final String fileLocation) {
         CSVReader csvReader;
         try {
-            csvReader = new CSVReader(new FileReader(fileLocation), ',');
+            csvReader = new CSVReader(new InputStreamReader(new FileInputStream(fileLocation), "utf-8"), ',');
         } catch (final FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (final UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
 
@@ -34,7 +37,7 @@ public class TogglRetriever {
         togglCsvToZenalMapper.setType(ZenalEntryMapper.class);
         final List<ZenalEntryMapper> zenalMapperEntries = csvToBean.parse(togglCsvToZenalMapper, csvReader);
 
-        final List<ZenalEntry> zenalEntries = new ArrayList<ZenalEntry>();
+        final ZenalEntryList zenalEntries = new ZenalEntryList();
         for (final ZenalEntryMapper zenalEntryMapper : zenalMapperEntries) {
             zenalEntries.add(zenalEntryMapper.toZenalEntry());
         }

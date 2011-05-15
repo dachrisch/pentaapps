@@ -7,6 +7,10 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
+	<properties>
+		<project.mainClass>de.pentasys.zenal.update.ZenalUpdater</project.mainClass>
+	</properties>
+
 	<groupId>org.dachrisch.pentasys-webapps</groupId>
 	<artifactId>zenal</artifactId>
 	<version>1.0-SNAPSHOT</version>
@@ -20,14 +24,29 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.seleniumhq.webdriver</groupId>
-			<artifactId>webdriver-selenium</artifactId>
-			<version>0.9.7376</version>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
 		</dependency>
 		<dependency>
-			<groupId>org.seleniumhq.webdriver</groupId>
-			<artifactId>webdriver-firefox</artifactId>
-			<version>0.9.7376</version>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-firefox-driver</artifactId>
+			<version>2.0b3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-remote-control</artifactId>
+			<version>2.0b3</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>selenium-iphone-driver</artifactId>
+					<groupId>org.seleniumhq.selenium</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>selenium-ie-driver</artifactId>
+					<groupId>org.seleniumhq.selenium</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.dachrisch.pentasys-webapps</groupId>
@@ -44,6 +63,13 @@
 			<artifactId>easymock</artifactId>
 			<version>3.0</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.1</version>
+			<type>jar</type>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 
