@@ -20,11 +20,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.6</version>
-		</dependency>
-		<dependency>
 			<groupId>org.seleniumhq.webdriver</groupId>
 			<artifactId>webdriver-selenium</artifactId>
 			<version>0.9.7376</version>
