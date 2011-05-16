@@ -2,11 +2,16 @@ package de.pentasys.rexx.update;
 
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.thoughtworks.selenium.Selenium;
 
 import de.pentasys.rexx.entities.RexxTrip;
 
 public class RexxTripsUpdater {
+
+    private Logger log = LoggerFactory.getLogger(getClass());
 
     private final Selenium selenium;
 
@@ -21,6 +26,7 @@ public class RexxTripsUpdater {
     }
 
     private void createTrip(final RexxTrip trip) {
+        log.debug(String.format("about to create %s", trip));
         selenium.click("4");
         selenium.type("4", trip.getReason());
         selenium.type("1", trip.getLeavingCity());
@@ -31,5 +37,6 @@ public class RexxTripsUpdater {
         selenium.type("8_date", trip.getFrom().toString("dd.MM.YYYY"));
         selenium.click("css=img[title=Speichern]");
         selenium.waitForPageToLoad("30000");
+        log.info(String.format("saved %s", trip));
     }
 }

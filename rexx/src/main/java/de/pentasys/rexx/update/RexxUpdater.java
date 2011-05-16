@@ -1,10 +1,15 @@
 package de.pentasys.rexx.update;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.thoughtworks.selenium.Selenium;
 
 import de.pentasys.rexx.builder.RexxJourney;
 
 public class RexxUpdater {
+
+    private Logger log = LoggerFactory.getLogger(getClass());
 
     private final Selenium selenium;
     private final RexxTripsUpdater rexxTripsUpdater;
@@ -21,6 +26,7 @@ public class RexxUpdater {
     }
 
     private void createInlandJourney(final RexxJourney rexxJourney) {
+        log.debug(String.format("about to create %s", rexxJourney));
         selenium.click("css=img[title=Inlandsreise]");
         selenium.waitForPageToLoad("30000");
 
@@ -31,6 +37,7 @@ public class RexxUpdater {
         selenium.type("5_time", rexxJourney.getJourneyTill().toString("kk:mm"));
         selenium.click("css=img[title=Speichern]");
         selenium.waitForPageToLoad("30000");
+        log.debug(String.format("saved %s", rexxJourney));
     }
 
     private void gotoSpesenPage() {
