@@ -24,29 +24,12 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.6</version>
-		</dependency>
-		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-firefox-driver</artifactId>
-			<version>2.0b3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-remote-control</artifactId>
-			<version>2.0b3</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>selenium-iphone-driver</artifactId>
-					<groupId>org.seleniumhq.selenium</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>selenium-ie-driver</artifactId>
-					<groupId>org.seleniumhq.selenium</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.dachrisch.pentasys-webapps</groupId>
@@ -66,15 +49,10 @@
 		<dependency>
 			<groupId>org.easymock</groupId>
 			<artifactId>easymock</artifactId>
-			<version>3.0</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.6.1</version>
-			<type>jar</type>
-			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 
