@@ -11,7 +11,7 @@ import de.pentasys.rexx.entities.RexxTrip;
 
 public class RexxTripsUpdater {
 
-    private Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final Selenium selenium;
 

@@ -1,9 +1,9 @@
 package de.pentasys.rexx.update;
 
-import static de.pentasys.builder.TimespanDateTime.thisWeek;
 import static de.pentasys.selenium.setup.SeleniumSetup.createSeleniumInstance;
 
 import java.io.Console;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +54,7 @@ public class RexxUpdater {
         selenium.waitForPageToLoad("30000");
     }
 
-    private void login(String username, String password) {
+    private void login(final String username, final String password) {
         selenium.open("/");
         selenium.type("txtUserName", username);
         selenium.type("txtUserPasswd", password);
@@ -70,11 +70,10 @@ public class RexxUpdater {
 
         final ZenalEntryList entriesFromCsv = new TogglRetriever().readEntriesFromCsv(csvLocation);
 
-        RexxJourney journey = new ZenalToRexxJourneyCreator(entriesFromCsv).createJourney(thisWeek());
+        final List<RexxJourney> journeys = new ZenalToRexxJourneyCreator(entriesFromCsv).createJourneys();
 
-        log.info(String.format("found journey from [%s] till [%s] with [%d] trips", journey.getJourneyFrom(),
-                journey.getJourneyTill(), journey.getTrips().size()));
-        log.debug(journey.toString());
+        log.info(String.format("found [%d] journeys..."));
+        log.debug(journeys.toString());
 
         log.info("pre-starting selenium");
         final Selenium selenium = createSeleniumInstance("https://zenal.pentasys.de");
@@ -84,7 +83,10 @@ public class RexxUpdater {
         final String password = new String(console.readPassword("enter your password"));
 
         updater.login(username, password);
-        updater.updateJourney(journey);
+        for (final RexxJourney journey : journeys) {
+            log.info(String.format("updating journey [%s]", journey));
+            updater.updateJourney(journey);
+        }
         selenium.stop();
     }
 

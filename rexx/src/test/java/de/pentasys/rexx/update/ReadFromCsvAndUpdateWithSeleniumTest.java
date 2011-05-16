@@ -9,14 +9,19 @@ import static org.easymock.EasyMock.verify;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.List;
+
 import org.joda.time.DateTime;
 import org.junit.Test;
 
 import com.thoughtworks.selenium.Selenium;
 
+import de.pentasys.builder.Category;
+import de.pentasys.builder.Project;
 import de.pentasys.builder.TimespanDateTime;
 import de.pentasys.rexx.builder.RexxJourney;
 import de.pentasys.rexx.zenal.ZenalToRexxJourneyCreator;
+import de.pentasys.zenal.ZenalEntry;
 import de.pentasys.zenal.ZenalEntryList;
 import de.pentasys.zenal.toggl.TogglRetriever;
 
@@ -53,6 +58,30 @@ public class ReadFromCsvAndUpdateWithSeleniumTest {
         replay(seleniumMock);
         new RexxUpdater(seleniumMock).updateJourney(rexxJourney);
         verify(seleniumMock);
+    }
+
+    @Test
+    public void createJourneysForMoreThanOneWeek() throws Exception {
+        final ZenalEntryList entryList = new ZenalEntryList();
+        final DateTime arrivalDate = new DateTime(2011, 5, 16, 7, 50, 0, 0);
+        final DateTime returnDate = new DateTime(2011, 5, 16, 17, 50, 0, 0);
+        entryList.add(new ZenalEntry(Project.MEDIASATURN, from(arrivalDate).till(9, 15), "Anfahrt Ingolstadt",
+                Category.TRAVEL_START));
+        entryList.add(new ZenalEntry(Project.MEDIASATURN, from(returnDate).till(19, 15), "Rückfahrt MUC",
+                Category.TRAVEL_END));
+
+        entryList.add(new ZenalEntry(Project.MEDIASATURN, from(arrivalDate.plusDays(7)).till(9, 15),
+                "Anfahrt Ingolstadt", Category.TRAVEL_START));
+        entryList.add(new ZenalEntry(Project.MEDIASATURN, from(returnDate.plusDays(7)).till(19, 15), "Rückfahrt MUC",
+                Category.TRAVEL_END));
+
+        final List<RexxJourney> journeys = new ZenalToRexxJourneyCreator(entryList).createJourneys();
+
+        assertThat(journeys.size(), is(2));
+        assertThat(journeys.get(0).getTrips().size(), is(1));
+        assertThat(journeys.get(1).getTrips().size(), is(1));
+        assertThat(journeys.get(1).getJourneyFrom(), is(arrivalDate.plusDays(7)));
+        assertThat(journeys.get(1).getJourneyTill(), is(arrivalDate.plusDays(7).withTime(19, 15, 0, 0)));
     }
 
     private void expectTrip(final Selenium seleniumMock, final TimespanDateTime timespan) {

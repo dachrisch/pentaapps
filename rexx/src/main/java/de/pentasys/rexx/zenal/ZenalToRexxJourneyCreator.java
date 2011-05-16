@@ -5,6 +5,7 @@ import static ch.lambdaj.Lambda.on;
 import static ch.lambdaj.Lambda.select;
 import static ch.lambdaj.Lambda.selectMax;
 import static ch.lambdaj.Lambda.selectMin;
+import static de.pentasys.builder.TimespanDateTime.weekOf;
 import static de.pentasys.rexx.builder.RexxJourneyBuilder.doJourney;
 import static de.pentasys.rexx.zenal.ZenalToRexxTripConverter.extractArrivalCity;
 import static de.pentasys.rexx.zenal.ZenalToRexxTripConverter.extractLeavingCity;
@@ -16,6 +17,8 @@ import static org.hamcrest.CoreMatchers.is;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.joda.time.DateTime;
 
@@ -72,6 +75,19 @@ public class ZenalToRexxJourneyCreator {
                 .withTrips(trips);
     }
 
+    public List<RexxJourney> createJourneys() {
+        final Set<TimespanDateTime> weeks = new TreeSet<TimespanDateTime>();
+        for (final ZenalEntry entry : zenalTripEntries) {
+            weeks.add(weekOf(entry.getFrom()));
+        }
+
+        final List<RexxJourney> journeys = new ArrayList<RexxJourney>();
+        for (final TimespanDateTime week : weeks) {
+            journeys.add(createJourney(week));
+        }
+        return journeys;
+    }
+
     protected List<RexxTrip> createTrips(final List<ZenalEntry> tripsWithinJourney) {
         final List<RexxTrip> trips = new ArrayList<RexxTrip>();
         for (int i = 0; i < tripsWithinJourney.size(); i += 2) {
@@ -85,4 +101,5 @@ public class ZenalToRexxJourneyCreator {
 
         return trips;
     }
+
 }

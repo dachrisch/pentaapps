@@ -1,9 +1,10 @@
 package de.pentasys.builder;
 
+import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.joda.time.DateTime;
 
-public class TimespanDateTime {
+public class TimespanDateTime implements Comparable<TimespanDateTime> {
 
     public static TimespanDateTime thisWeek() {
         return weekOf(new DateTime());
@@ -34,5 +35,10 @@ public class TimespanDateTime {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
+    }
+
+    @Override
+    public int compareTo(TimespanDateTime other) {
+        return CompareToBuilder.reflectionCompare(this, other);
     }
 }
