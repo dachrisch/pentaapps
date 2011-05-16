@@ -8,6 +8,8 @@ import static de.pentasys.rexx.builder.RexxJourneyBuilder.doJourney;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.Collections;
+
 import org.joda.time.DateTime;
 import org.junit.Test;
 
@@ -23,9 +25,9 @@ public class FloatingApiRexxEntryTest {
 
     @Test
     public void createInlandTrip() throws Exception {
-        final RexxJourney rexxJourney = doJourney(Project.MEDIASATURN).starting(datetime(2011, 5, 5, 7, 50)).from(
-                "München").till(datetime(2011, 5, 15, 17, 50)).to("Ingolstadt").withTrip(
-                from(datetime(2011, 5, 5, 7, 50)).till(datetime(2011, 5, 15, 17, 50)), "projekteinsatz");
+        final RexxJourney rexxJourney = doJourney(Project.MEDIASATURN).starting(datetime(2011, 5, 5, 7, 50))
+                .from("München").till(datetime(2011, 5, 15, 17, 50)).to("Ingolstadt")
+                .withTrip(from(datetime(2011, 5, 5, 7, 50)).till(datetime(2011, 5, 15, 17, 50)), "projekteinsatz");
 
         assertThat(rexxJourney.getLeavingCity(), is("München"));
         assertThat(rexxJourney.getArrivalCity(), is("Ingolstadt"));
@@ -48,7 +50,7 @@ public class FloatingApiRexxEntryTest {
         final RexxTrip trip = new RexxTrip(new TripCities("a", "b"), new TimespanDateTime(tripStartDate, tripEndDate),
                 "bla");
         final RexxJourney rexxJourney = new RexxJourney(Project.MEDIASATURN, new TripCities("a", "b"),
-                new TimespanDateTime(tripEndDate, tripEndDate), trip);
+                new TimespanDateTime(tripEndDate, tripEndDate), Collections.singletonList(trip));
 
         trip.with().inboundCosts(train(12.50, Payment.CREDIT)).outboundCosts(train(12.50, Payment.CREDIT));
         trip.with().inboundCosts(taxi(14., Payment.CASH)).outboundCosts(taxi(14., Payment.CASH));

@@ -17,7 +17,7 @@ public class ZenalToRexxEntryConverterTest {
 
     @Test
     public void convertZenalToRexxEntry() throws Exception {
-        final RexxTrip trip = new ZenalToRexxConverter().convert(endEntry(), startEntry());
+        final RexxTrip trip = new ZenalToRexxTripConverter().convert(endEntry(), startEntry());
 
         assertThat(trip.getArrivalCity(), is("City Arrival"));
         assertThat(trip.getLeavingCity(), is("City Leaving"));
@@ -26,9 +26,9 @@ public class ZenalToRexxEntryConverterTest {
     @Test
     public void zenalEntryForLeavingHasToBeOfCategoryTravel_End() throws Exception {
         try {
-            new ZenalToRexxConverter().convert(startEntry(), startEntry());
+            new ZenalToRexxTripConverter().convert(startEntry(), startEntry());
             fail("expected to fail, as leaving has wrong category");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             assertThat(e.getMessage(),
                     containsString(String.format("not of type [%s]", Category.TRAVEL_END.toString())));
         }
@@ -37,9 +37,9 @@ public class ZenalToRexxEntryConverterTest {
     @Test
     public void zenalEntryForArrivalHasToBeOfCategoryTravel_Start() throws Exception {
         try {
-            new ZenalToRexxConverter().convert(endEntry(), endEntry());
+            new ZenalToRexxTripConverter().convert(endEntry(), endEntry());
             fail("expected to fail, as arrival has wrong category");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             assertThat(e.getMessage(),
                     containsString(String.format("not of type [%s]", Category.TRAVEL_START.toString())));
         }
@@ -48,9 +48,9 @@ public class ZenalToRexxEntryConverterTest {
     @Test
     public void zenalEntryFoBothHasToBeOfCategoryTravel_StartAndTravel_EndRespectively() throws Exception {
         try {
-            new ZenalToRexxConverter().convert(startEntry(), endEntry());
+            new ZenalToRexxTripConverter().convert(startEntry(), endEntry());
             fail("expected to fail, as both has wrong category");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             assertThat(e.getMessage(),
                     containsString(String.format("not of type [%s]", Category.TRAVEL_START.toString())));
         }

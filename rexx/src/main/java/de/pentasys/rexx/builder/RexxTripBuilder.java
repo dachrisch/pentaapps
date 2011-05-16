@@ -1,6 +1,9 @@
 package de.pentasys.rexx.builder;
 
+import java.util.List;
+
 import de.pentasys.builder.TimespanDateTime;
+import de.pentasys.rexx.entities.RexxTrip;
 
 public class RexxTripBuilder {
 
@@ -12,6 +15,10 @@ public class RexxTripBuilder {
 
     public RexxJourney withTrip(final TimespanDateTime timeSpan, final String reason) {
         return rexxJourneyBuilder.withTrip(timeSpan, reason);
+    }
+
+    public RexxJourney withTrips(final List<RexxTrip> trips) {
+        return rexxJourneyBuilder.withTrips(trips);
     }
 
 }

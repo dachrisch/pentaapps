@@ -1,9 +1,12 @@
 package de.pentasys.rexx.builder;
 
+import java.util.List;
+
 import org.joda.time.DateTime;
 
 import de.pentasys.builder.Project;
 import de.pentasys.builder.TimespanDateTime;
+import de.pentasys.rexx.entities.RexxTrip;
 import de.pentasys.rexx.entities.TripCities;
 
 public class RexxJourneyBuilder {
@@ -53,6 +56,12 @@ public class RexxJourneyBuilder {
         }
         rexxJourney.withTrip(timeSpan, reason);
 
+        return rexxJourney;
+    }
+
+    public RexxJourney withTrips(final List<RexxTrip> trips) {
+        rexxJourney = new RexxJourney(project, new TripCities(leavingCity, arrivalCity), new TimespanDateTime(
+                startDate, tillDate), trips);
         return rexxJourney;
     }
 

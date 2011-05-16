@@ -1,9 +1,13 @@
 package de.pentasys.rexx.entities;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.joda.time.DateTime;
 
 import de.pentasys.builder.TimespanDateTime;
@@ -56,5 +60,20 @@ public class RexxTrip implements Comparable<RexxTrip> {
 
     public String getArrivalCity() {
         return tripCities.getArrivalCity();
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this, Collections.singletonList("costs"));
+    }
+
+    @Override
+    public boolean equals(final Object other) {
+        return EqualsBuilder.reflectionEquals(this, other, Collections.singletonList("costs"));
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

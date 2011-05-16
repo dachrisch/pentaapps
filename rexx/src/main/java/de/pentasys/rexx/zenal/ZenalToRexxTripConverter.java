@@ -9,31 +9,38 @@ import de.pentasys.rexx.entities.RexxTrip;
 import de.pentasys.rexx.entities.TripCities;
 import de.pentasys.zenal.ZenalEntry;
 
-public class ZenalToRexxConverter {
+public class ZenalToRexxTripConverter {
 
     private static final Pattern CITY_PATTERN = Pattern.compile(".*?fahrt ([\\w ]+)");
 
     public RexxTrip convert(final ZenalEntry zenalLeavingEntry, final ZenalEntry zenalArrivalEntry) {
 
-        final String arrivalCity = extractCityInfo(zenalArrivalEntry, Category.TRAVEL_START);
-        final String leavingCity = extractCityInfo(zenalLeavingEntry, Category.TRAVEL_END);
-        
+        final String arrivalCity = extractArrivalCity(zenalArrivalEntry);
+        final String leavingCity = extractLeavingCity(zenalLeavingEntry);
+
         final TripCities tripCities = new TripCities(leavingCity, arrivalCity);
         final TimespanDateTime timeSpan = new TimespanDateTime(null, null);
         final String reason = "";
         return new RexxTrip(tripCities, timeSpan, reason);
     }
 
-    private String extractCityInfo(final ZenalEntry zenalArrivalEntry, Category category) {
-        if (!category.getCategory().equals(zenalArrivalEntry.getCategory())) {
-            throw new IllegalArgumentException(
-                    String.format("entry [%s] not of type [%s]", zenalArrivalEntry, category));
+    public static String extractArrivalCity(final ZenalEntry zenalEntry) {
+        return extractCityInfo(zenalEntry, Category.TRAVEL_START);
+    }
+
+    public static String extractLeavingCity(final ZenalEntry zenalEntry) {
+        return extractCityInfo(zenalEntry, Category.TRAVEL_END);
+    }
+
+    public static String extractCityInfo(final ZenalEntry zenalEntry, final Category category) {
+        if (!category.getCategory().equals(zenalEntry.getCategory())) {
+            throw new IllegalArgumentException(String.format("entry [%s] not of type [%s]", zenalEntry, category));
         }
-        Matcher matcher = CITY_PATTERN.matcher(zenalArrivalEntry.getDescription());
+        final Matcher matcher = CITY_PATTERN.matcher(zenalEntry.getDescription());
         if (!matcher.find()) {
             throw new IllegalArgumentException(String.format(
                     "description has to be in format [%s] in order to get parsed: %s", CITY_PATTERN,
-                    zenalArrivalEntry.getDescription()));
+                    zenalEntry.getDescription()));
         }
         final String arrivalCity = matcher.group(1);
         return arrivalCity;

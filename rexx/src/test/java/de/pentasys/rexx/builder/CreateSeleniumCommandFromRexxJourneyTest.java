@@ -1,4 +1,4 @@
-package de.pentasys.rexx.update;
+package de.pentasys.rexx.builder;
 
 import static de.pentasys.builder.DateTimeGenerator.datetime;
 import static de.pentasys.builder.DateTimeGenerator.from;
@@ -15,13 +15,15 @@ import com.thoughtworks.selenium.Selenium;
 
 import de.pentasys.builder.Project;
 import de.pentasys.builder.TimespanDateTime;
-import de.pentasys.rexx.builder.RexxJourney;
 import de.pentasys.rexx.entities.RexxTrip;
 import de.pentasys.rexx.entities.TripCities;
 import de.pentasys.rexx.entities.expenses.Expense;
 import de.pentasys.rexx.entities.expenses.Payment;
 import de.pentasys.rexx.entities.expenses.TaxiExpense;
 import de.pentasys.rexx.entities.expenses.TrainExpense;
+import de.pentasys.rexx.update.ExpenseUpdater;
+import de.pentasys.rexx.update.RexxTripsUpdater;
+import de.pentasys.rexx.update.RexxUpdater;
 
 public class CreateSeleniumCommandFromRexxJourneyTest {
     @Test
@@ -103,9 +105,7 @@ public class CreateSeleniumCommandFromRexxJourneyTest {
     @Test
     public void createJourneyCommands() throws Exception {
         final RexxJourney rexxJourney = new RexxJourney(Project.MEDIASATURN, new TripCities("a", "b"),
-                new TimespanDateTime(new DateTime(2010, 1, 1, 10, 20, 0, 0), new DateTime(2010, 1, 2, 20, 10, 0, 0)),
-                new RexxTrip(new TripCities(null, null), new TimespanDateTime(null, null), null));
-        rexxJourney.getTrips().clear();
+                new TimespanDateTime(new DateTime(2010, 1, 1, 10, 20, 0, 0), new DateTime(2010, 1, 2, 20, 10, 0, 0)));
         final Selenium seleniumMock = createStrictMock(Selenium.class);
         // journey
         seleniumMock.open("/");
