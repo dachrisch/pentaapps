@@ -72,11 +72,11 @@ public class RexxUpdater {
 
         final List<RexxJourney> journeys = new ZenalToRexxJourneyCreator(entriesFromCsv).createJourneys();
 
-        log.info(String.format("found [%d] journeys..."));
+        log.info(String.format("found [%d] journeys...", journeys.size()));
         log.debug(journeys.toString());
 
         log.info("pre-starting selenium");
-        final Selenium selenium = createSeleniumInstance("https://zenal.pentasys.de");
+        final Selenium selenium = createSeleniumInstance("http://pentasys-portal.rexx-hr.de/");
 
         final RexxUpdater updater = new RexxUpdater(selenium);
         final String username = console.readLine("username: ");
