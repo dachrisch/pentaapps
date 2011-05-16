@@ -38,6 +38,7 @@
 		<module>../selenium-addon</module>
 		<module>../zenal</module>
 		<module>../zenal-api</module>
+		<module>../toggl</module>
 	</modules>
 	<build>
 		<plugins>
