@@ -1,4 +1,4 @@
-package de.pentasys.zenal.update;
+package de.pentasys.rexx.update;
 
 import static de.pentasys.selenium.setup.SeleniumSetup.createSeleniumInstance;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -11,7 +11,7 @@ public class StartSeleniumWithoutUpdateLiveTest {
 
     @Test
     public void startSeleniumInOrderToCheckClasspath() throws Exception {
-        final WebDriverBackedSelenium selenium = createSeleniumInstance("http://localhost");
+        final WebDriverBackedSelenium selenium = createSeleniumInstance("http://google.com");
 
         assertThat(selenium, notNullValue());
 

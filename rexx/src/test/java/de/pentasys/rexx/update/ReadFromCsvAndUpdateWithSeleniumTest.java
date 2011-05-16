@@ -1,4 +1,4 @@
-package de.pentasys.rexx;
+package de.pentasys.rexx.update;
 
 import static de.pentasys.builder.DateTimeGenerator.date;
 import static de.pentasys.builder.DateTimeGenerator.from;
@@ -15,7 +15,6 @@ import com.thoughtworks.selenium.Selenium;
 
 import de.pentasys.builder.TimespanDateTime;
 import de.pentasys.rexx.builder.RexxJourney;
-import de.pentasys.rexx.update.RexxUpdater;
 import de.pentasys.rexx.zenal.ZenalToRexxJourneyCreator;
 import de.pentasys.zenal.ZenalEntryList;
 import de.pentasys.zenal.toggl.TogglRetriever;

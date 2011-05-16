@@ -10,8 +10,9 @@ import static de.pentasys.rexx.zenal.ZenalToRexxTripConverter.extractArrivalCity
 import static de.pentasys.rexx.zenal.ZenalToRexxTripConverter.extractLeavingCity;
 import static de.pentasys.rexx.zenal.matcher.DateTimeMatcher.isAfter;
 import static de.pentasys.rexx.zenal.matcher.DateTimeMatcher.isBefore;
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.matchers.JUnitMatchers.either;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,18 +35,18 @@ public class ZenalToRexxJourneyCreator {
         zenalTripEntries = filterTripCategories(zenalEntries);
     }
 
+    @SuppressWarnings("unchecked")
     public static List<ZenalEntry> filterTripCategories(final Iterable<ZenalEntry> zenalEntries) {
-        return select(
-                zenalEntries,
-                having(on(ZenalEntry.class).getCategory(), either(is(Category.TRAVEL_START))
-                        .or(is(Category.TRAVEL_END))));
+        return select(zenalEntries,
+                having(on(ZenalEntry.class).getCategory(), anyOf(is(Category.TRAVEL_START), is(Category.TRAVEL_END))));
     }
 
+    @SuppressWarnings("unchecked")
     public static List<ZenalEntry> filterTimespan(final Iterable<ZenalEntry> zenalEntries,
             final TimespanDateTime timepsan) {
         return select(
                 zenalEntries,
-                either(having(on(ZenalEntry.class).getFrom(), isAfter(timepsan.getFrom()))).and(
+                allOf(having(on(ZenalEntry.class).getFrom(), isAfter(timepsan.getFrom())),
                         having(on(ZenalEntry.class).getTill(), isBefore(timepsan.getTill()))));
     }
 

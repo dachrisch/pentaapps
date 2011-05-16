@@ -1,6 +1,6 @@
 package de.pentasys.zenal.update;
 
-import static de.pentasys.zenal.selenium.setup.SeleniumSetup.createSeleniumInstance;
+import static de.pentasys.selenium.setup.SeleniumSetup.createSeleniumInstance;
 
 import java.io.Console;
 
@@ -10,9 +10,9 @@ import org.slf4j.LoggerFactory;
 import com.thoughtworks.selenium.Selenium;
 import com.thoughtworks.selenium.SeleniumException;
 
+import de.pentasys.selenium.check.SeleniumBase;
 import de.pentasys.zenal.ZenalEntry;
 import de.pentasys.zenal.ZenalEntryList;
-import de.pentasys.zenal.selenium.SeleniumBase;
 import de.pentasys.zenal.toggl.TogglRetriever;
 
 public class ZenalUpdater extends SeleniumBase {
