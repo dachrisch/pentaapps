@@ -15,7 +15,7 @@ public class TogglRetrieverTest {
     @Test
     public void convertCsvToZenalEntries() throws Exception {
         final ZenalEntryList zenalEntries = new TogglRetriever()
-                .readEntriesFromCsv("src/test/java/de/pentasys/zenal/toggl/time_entries_20110510_164432.csv");
+                .readEntriesFromCsv("src/test/resources/time_entries_20110510_164432.csv");
 
         assertThat(zenalEntries.size(), is(4));
         final ZenalEntry zenalEntry = zenalEntries.first();
