@@ -37,6 +37,7 @@
 		<module>../rexx</module>
 		<module>../selenium-addon</module>
 		<module>../zenal</module>
+		<module>../zenal-api</module>
 	</modules>
 	<build>
 		<plugins>

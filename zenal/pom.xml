@@ -55,7 +55,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.dachrisch.pentasys-webapps</groupId>
-			<artifactId>pentabase</artifactId>
+			<artifactId>zenal-api</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
