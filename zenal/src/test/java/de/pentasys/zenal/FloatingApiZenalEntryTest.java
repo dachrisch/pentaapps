@@ -1,7 +1,7 @@
 package de.pentasys.zenal;
 
-import static de.pentasys.zenal.builder.DateTimeGenerator.datetime;
-import static de.pentasys.zenal.builder.DateTimeGenerator.from;
+import static de.pentasys.builder.DateTimeGenerator.datetime;
+import static de.pentasys.builder.DateTimeGenerator.from;
 import static de.pentasys.zenal.builder.ZenalEntryCreator.within;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -10,8 +10,8 @@ import java.util.Iterator;
 
 import org.junit.Test;
 
-import de.pentasys.zenal.builder.Category;
-import de.pentasys.zenal.builder.Project;
+import de.pentasys.builder.Category;
+import de.pentasys.builder.Project;
 
 public class FloatingApiZenalEntryTest {
 

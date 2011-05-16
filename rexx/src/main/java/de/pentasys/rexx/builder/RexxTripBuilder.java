@@ -1,6 +1,6 @@
 package de.pentasys.rexx.builder;
 
-import de.pentasys.zenal.builder.TimespanDateTime;
+import de.pentasys.builder.TimespanDateTime;
 
 public class RexxTripBuilder {
 

@@ -8,10 +8,10 @@ import static org.junit.matchers.JUnitMatchers.containsString;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
+import de.pentasys.builder.Category;
+import de.pentasys.builder.Project;
 import de.pentasys.rexx.entities.RexxTrip;
 import de.pentasys.zenal.ZenalEntry;
-import de.pentasys.zenal.builder.Category;
-import de.pentasys.zenal.builder.Project;
 
 public class ZenalToRexxEntryConverterTest {
 

@@ -1,7 +1,7 @@
 package de.pentasys.rexx.update;
 
-import static de.pentasys.zenal.builder.DateTimeGenerator.datetime;
-import static de.pentasys.zenal.builder.DateTimeGenerator.from;
+import static de.pentasys.builder.DateTimeGenerator.datetime;
+import static de.pentasys.builder.DateTimeGenerator.from;
 import static org.easymock.EasyMock.createStrictMock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -13,6 +13,8 @@ import org.junit.Test;
 
 import com.thoughtworks.selenium.Selenium;
 
+import de.pentasys.builder.Project;
+import de.pentasys.builder.TimespanDateTime;
 import de.pentasys.rexx.builder.RexxJourney;
 import de.pentasys.rexx.entities.RexxTrip;
 import de.pentasys.rexx.entities.TripCities;
@@ -20,8 +22,6 @@ import de.pentasys.rexx.entities.expenses.Expense;
 import de.pentasys.rexx.entities.expenses.Payment;
 import de.pentasys.rexx.entities.expenses.TaxiExpense;
 import de.pentasys.rexx.entities.expenses.TrainExpense;
-import de.pentasys.zenal.builder.Project;
-import de.pentasys.zenal.builder.TimespanDateTime;
 
 public class CreateSeleniumCommandFromRexxJourneyTest {
     @Test

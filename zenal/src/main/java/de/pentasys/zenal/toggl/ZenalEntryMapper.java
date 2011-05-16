@@ -4,9 +4,9 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import de.pentasys.builder.Category;
+import de.pentasys.builder.Project;
 import de.pentasys.zenal.ZenalEntry;
-import de.pentasys.zenal.builder.Category;
-import de.pentasys.zenal.builder.Project;
 
 public class ZenalEntryMapper {
     private static final DateTimeFormatter DATETIME_PATTERN = DateTimeFormat.forPattern("MM/dd/YYYY kk:mm");

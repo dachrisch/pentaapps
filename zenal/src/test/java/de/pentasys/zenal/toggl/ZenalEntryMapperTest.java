@@ -7,8 +7,8 @@ import static org.junit.Assert.assertThat;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
-import de.pentasys.zenal.builder.Category;
-import de.pentasys.zenal.builder.Project;
+import de.pentasys.builder.Category;
+import de.pentasys.builder.Project;
 
 public class ZenalEntryMapperTest {
     @Test

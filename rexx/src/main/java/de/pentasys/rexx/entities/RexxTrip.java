@@ -6,9 +6,9 @@ import java.util.List;
 import org.apache.commons.lang.builder.CompareToBuilder;
 import org.joda.time.DateTime;
 
+import de.pentasys.builder.TimespanDateTime;
 import de.pentasys.rexx.builder.ExpenseBuilder;
 import de.pentasys.rexx.entities.expenses.Expense;
-import de.pentasys.zenal.builder.TimespanDateTime;
 
 public class RexxTrip implements Comparable<RexxTrip> {
 

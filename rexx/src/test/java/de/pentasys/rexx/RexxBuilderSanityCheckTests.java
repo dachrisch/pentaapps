@@ -1,8 +1,8 @@
 package de.pentasys.rexx;
 
+import static de.pentasys.builder.DateTimeGenerator.datetime;
+import static de.pentasys.builder.DateTimeGenerator.from;
 import static de.pentasys.rexx.builder.RexxJourneyBuilder.doJourney;
-import static de.pentasys.zenal.builder.DateTimeGenerator.datetime;
-import static de.pentasys.zenal.builder.DateTimeGenerator.from;
 import static junit.framework.Assert.fail;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -10,8 +10,8 @@ import static org.junit.Assert.assertThat;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
-import de.pentasys.zenal.builder.Project;
-import de.pentasys.zenal.builder.TimespanDateTime;
+import de.pentasys.builder.Project;
+import de.pentasys.builder.TimespanDateTime;
 
 /**
  * 

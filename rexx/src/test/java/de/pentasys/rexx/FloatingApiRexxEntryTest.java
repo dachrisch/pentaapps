@@ -1,23 +1,23 @@
 package de.pentasys.rexx;
 
+import static de.pentasys.builder.DateTimeGenerator.datetime;
+import static de.pentasys.builder.DateTimeGenerator.from;
 import static de.pentasys.rexx.builder.ExpenseBuilder.taxi;
 import static de.pentasys.rexx.builder.ExpenseBuilder.train;
 import static de.pentasys.rexx.builder.RexxJourneyBuilder.doJourney;
-import static de.pentasys.zenal.builder.DateTimeGenerator.datetime;
-import static de.pentasys.zenal.builder.DateTimeGenerator.from;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
 
+import de.pentasys.builder.Project;
+import de.pentasys.builder.TimespanDateTime;
 import de.pentasys.rexx.builder.RexxJourney;
 import de.pentasys.rexx.entities.RexxTrip;
 import de.pentasys.rexx.entities.TripCities;
 import de.pentasys.rexx.entities.expenses.Payment;
 import de.pentasys.rexx.entities.expenses.VoucherType;
-import de.pentasys.zenal.builder.Project;
-import de.pentasys.zenal.builder.TimespanDateTime;
 
 public class FloatingApiRexxEntryTest {
 

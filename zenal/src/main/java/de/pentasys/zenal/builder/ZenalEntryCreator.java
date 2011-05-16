@@ -1,5 +1,8 @@
 package de.pentasys.zenal.builder;
 
+import de.pentasys.builder.Category;
+import de.pentasys.builder.Project;
+import de.pentasys.builder.TimespanDateTime;
 import de.pentasys.zenal.ZenalEntry;
 import de.pentasys.zenal.ZenalEntryList;
 

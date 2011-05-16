@@ -6,9 +6,9 @@ import static org.junit.Assert.assertThat;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
+import de.pentasys.builder.Category;
 import de.pentasys.zenal.ZenalEntry;
 import de.pentasys.zenal.ZenalEntryList;
-import de.pentasys.zenal.builder.Category;
 
 public class TogglRetrieverTest {
 

@@ -2,9 +2,9 @@ package de.pentasys.rexx.builder;
 
 import org.joda.time.DateTime;
 
+import de.pentasys.builder.Project;
+import de.pentasys.builder.TimespanDateTime;
 import de.pentasys.rexx.entities.TripCities;
-import de.pentasys.zenal.builder.Project;
-import de.pentasys.zenal.builder.TimespanDateTime;
 
 public class RexxJourneyBuilder {
 

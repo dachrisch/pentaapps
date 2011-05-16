@@ -1,7 +1,7 @@
 package de.pentasys.zenal.update;
 
-import static de.pentasys.zenal.builder.DateTimeGenerator.datetime;
-import static de.pentasys.zenal.builder.DateTimeGenerator.from;
+import static de.pentasys.builder.DateTimeGenerator.datetime;
+import static de.pentasys.builder.DateTimeGenerator.from;
 import static de.pentasys.zenal.builder.ZenalEntryCreator.within;
 import static org.easymock.EasyMock.createStrictMock;
 import static org.easymock.EasyMock.expect;
@@ -12,8 +12,8 @@ import org.junit.Test;
 
 import com.thoughtworks.selenium.Selenium;
 
+import de.pentasys.builder.Project;
 import de.pentasys.zenal.ZenalEntry;
-import de.pentasys.zenal.builder.Project;
 
 public class CreateSeleniumCommandFromZenalEntryTest {
 

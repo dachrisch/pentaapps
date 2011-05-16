@@ -5,9 +5,9 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.joda.time.DateTime;
 
-import de.pentasys.zenal.builder.Category;
-import de.pentasys.zenal.builder.Project;
-import de.pentasys.zenal.builder.TimespanDateTime;
+import de.pentasys.builder.Category;
+import de.pentasys.builder.Project;
+import de.pentasys.builder.TimespanDateTime;
 
 public class ZenalEntry implements Comparable<ZenalEntry> {
 

@@ -3,11 +3,11 @@ package de.pentasys.rexx.zenal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import de.pentasys.builder.Category;
+import de.pentasys.builder.TimespanDateTime;
 import de.pentasys.rexx.entities.RexxTrip;
 import de.pentasys.rexx.entities.TripCities;
 import de.pentasys.zenal.ZenalEntry;
-import de.pentasys.zenal.builder.Category;
-import de.pentasys.zenal.builder.TimespanDateTime;
 
 public class ZenalToRexxConverter {
 
