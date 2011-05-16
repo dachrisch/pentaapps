@@ -92,11 +92,13 @@
 	</dependencies>
 	<modules>
 		<module>../pentabase</module>
-		<module>../rexx</module>
 		<module>../selenium-addon</module>
-		<module>../zenal</module>
 		<module>../zenal-api</module>
 		<module>../toggl</module>
+		<module>../rexx</module>
+		<module>../rexx-dist</module>
+		<module>../zenal</module>
+		<module>../zenal-dist</module>
 	</modules>
 	<build>
 		<plugins>

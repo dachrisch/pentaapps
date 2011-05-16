@@ -10,11 +10,11 @@
 	<artifactId>rexx-dist</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>org.dachrisch.pentasys-webapps.rexx-dist</name>
-	
+
 	<properties>
 		<project.mainClass>de.pentasys.rexx.update.RexxUpdater</project.mainClass>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.dachrisch.pentasys-webapps</groupId>
@@ -22,4 +22,21 @@
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>make-assembly</id> <!-- this is used for inheritance merges -->
+						<phase>package</phase> <!-- bind to the packaging phase -->
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
