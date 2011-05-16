@@ -13,29 +13,30 @@ public class ZenalToRexxConverter {
 
     private static final Pattern CITY_PATTERN = Pattern.compile(".*?fahrt ([\\w ]+)");
 
-    public RexxTrip convert(final ZenalEntry zenalReturnEntry, final ZenalEntry zenalArrivalEntry) {
+    public RexxTrip convert(final ZenalEntry zenalLeavingEntry, final ZenalEntry zenalArrivalEntry) {
 
-        if (!Category.TRAVEL_START.getCategory().equals(zenalArrivalEntry.getCategory())) {
-            throw new IllegalArgumentException(String.format("category of arrival entry must be [%s]: %s",
-                    Category.TRAVEL_START, zenalArrivalEntry));
-        }
-        if (!Category.TRAVEL_END.getCategory().equals(zenalReturnEntry.getCategory())) {
-            throw new IllegalArgumentException(String.format("category of return entry must be [%s]: %s",
-                    Category.TRAVEL_END, zenalReturnEntry));
-        }
-
-        final Matcher arrivalMatcher = CITY_PATTERN.matcher(zenalArrivalEntry.getDescription());
-        if (!arrivalMatcher.find()) {
-            throw new IllegalArgumentException(String.format(
-                    "description has to be in format [%s] in order to get parsed: %s", CITY_PATTERN, zenalArrivalEntry
-                            .getDescription()));
-        }
-        final String arrivalCity = arrivalMatcher.group(1);
-        final String returnCity = "";
-        final TripCities tripCities = new TripCities(arrivalCity, returnCity);
+        final String arrivalCity = extractCityInfo(zenalArrivalEntry, Category.TRAVEL_START);
+        final String leavingCity = extractCityInfo(zenalLeavingEntry, Category.TRAVEL_END);
+        
+        final TripCities tripCities = new TripCities(leavingCity, arrivalCity);
         final TimespanDateTime timeSpan = new TimespanDateTime(null, null);
         final String reason = "";
         return new RexxTrip(tripCities, timeSpan, reason);
+    }
+
+    private String extractCityInfo(final ZenalEntry zenalArrivalEntry, Category category) {
+        if (!category.getCategory().equals(zenalArrivalEntry.getCategory())) {
+            throw new IllegalArgumentException(
+                    String.format("entry [%s] not of type [%s]", zenalArrivalEntry, category));
+        }
+        Matcher matcher = CITY_PATTERN.matcher(zenalArrivalEntry.getDescription());
+        if (!matcher.find()) {
+            throw new IllegalArgumentException(String.format(
+                    "description has to be in format [%s] in order to get parsed: %s", CITY_PATTERN,
+                    zenalArrivalEntry.getDescription()));
+        }
+        final String arrivalCity = matcher.group(1);
+        return arrivalCity;
     }
 
 }
