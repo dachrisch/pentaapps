@@ -25,34 +25,34 @@ public class ZenalEntryMapperTest {
     public void setProject() throws Exception {
         final ZenalEntryMapper mapper = new ZenalEntryMapper();
 
-        assertThat(mapper.toZenalEntry().getProjectId(), nullValue());
+        assertThat(mapper.toZenalEntry().getProject(), nullValue());
 
         mapper.setProject("mediasaturn");
-        assertThat(mapper.toZenalEntry().getProjectId(), is(Project.MEDIASATURN.getProjectId()));
+        assertThat(mapper.toZenalEntry().getProject(), is(Project.MEDIASATURN));
     }
 
     @Test
     public void setDescriptionAndParseCategory() throws Exception {
         final ZenalEntryMapper mapper = new ZenalEntryMapper();
         mapper.setDescription("anything");
-        assertThat(mapper.toZenalEntry().getCategory(), is(Category.PROJECT.getCategory()));
+        assertThat(mapper.toZenalEntry().getCategory(), is(Category.PROJECT));
 
         mapper.setDescription("anfahrt");
-        assertThat(mapper.toZenalEntry().getCategory(), is(Category.TRAVEL_START.getCategory()));
+        assertThat(mapper.toZenalEntry().getCategory(), is(Category.TRAVEL_START));
 
         mapper.setDescription("anyanfahrtthing");
-        assertThat(mapper.toZenalEntry().getCategory(), is(Category.TRAVEL_START.getCategory()));
+        assertThat(mapper.toZenalEntry().getCategory(), is(Category.TRAVEL_START));
 
         mapper.setDescription("rückfahrt");
-        assertThat(mapper.toZenalEntry().getCategory(), is(Category.TRAVEL_END.getCategory()));
+        assertThat(mapper.toZenalEntry().getCategory(), is(Category.TRAVEL_END));
 
         mapper.setDescription("anyrückfahrtthing");
-        assertThat(mapper.toZenalEntry().getCategory(), is(Category.TRAVEL_END.getCategory()));
+        assertThat(mapper.toZenalEntry().getCategory(), is(Category.TRAVEL_END));
 
         mapper.setDescription("rueckfahrt");
-        assertThat(mapper.toZenalEntry().getCategory(), is(Category.TRAVEL_END.getCategory()));
+        assertThat(mapper.toZenalEntry().getCategory(), is(Category.TRAVEL_END));
 
         mapper.setDescription("anyrueckfahrtthing");
-        assertThat(mapper.toZenalEntry().getCategory(), is(Category.TRAVEL_END.getCategory()));
+        assertThat(mapper.toZenalEntry().getCategory(), is(Category.TRAVEL_END));
     }
 }

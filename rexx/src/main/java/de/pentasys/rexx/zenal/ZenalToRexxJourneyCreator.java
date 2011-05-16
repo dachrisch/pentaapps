@@ -37,8 +37,8 @@ public class ZenalToRexxJourneyCreator {
     public static List<ZenalEntry> filterTripCategories(final Iterable<ZenalEntry> zenalEntries) {
         return select(
                 zenalEntries,
-                having(on(ZenalEntry.class).getCategory(),
-                        either(is(Category.TRAVEL_START.getCategory())).or(is(Category.TRAVEL_END.getCategory()))));
+                having(on(ZenalEntry.class).getCategory(), either(is(Category.TRAVEL_START))
+                        .or(is(Category.TRAVEL_END))));
     }
 
     public static List<ZenalEntry> filterTimespan(final Iterable<ZenalEntry> zenalEntries,
@@ -52,6 +52,11 @@ public class ZenalToRexxJourneyCreator {
     public RexxJourney createJourney(final TimespanDateTime timespan) {
         final List<ZenalEntry> tripsWithinJourney = filterTimespan(zenalTripEntries, timespan);
 
+        if (tripsWithinJourney.size() < 2) {
+            throw new IllegalArgumentException(String.format("not enought entries for [%s]: %s", timespan,
+                    tripsWithinJourney));
+        }
+
         final ZenalEntry startEntry = selectMin(tripsWithinJourney, on(ZenalEntry.class).getFrom());
         final ZenalEntry endEntry = selectMax(tripsWithinJourney, on(ZenalEntry.class).getTill());
         final DateTime startDate = startEntry.getFrom();
@@ -62,7 +67,8 @@ public class ZenalToRexxJourneyCreator {
 
         final List<RexxTrip> trips = createTrips(tripsWithinJourney);
 
-        return doJourney(null).starting(startDate).from(leavingCity).till(endDate).to(arrivalCity).withTrips(trips);
+        return doJourney(startEntry.getProject()).starting(startDate).from(leavingCity).till(endDate).to(arrivalCity)
+                .withTrips(trips);
     }
 
     protected List<RexxTrip> createTrips(final List<ZenalEntry> tripsWithinJourney) {
@@ -73,7 +79,7 @@ public class ZenalToRexxJourneyCreator {
             final String arrivalCity = extractArrivalCity(startEntry);
             final String leavingCity = extractLeavingCity(endEntry);
             trips.add(new RexxTrip(new TripCities(leavingCity, arrivalCity), new TimespanDateTime(startEntry.getFrom(),
-                    endEntry.getTill()), String.format("Projekteinsatz [%s]", startEntry.getProjectId())));
+                    endEntry.getTill()), String.format("Projekteinsatz [%s]", startEntry.getProject().getProjectId())));
         }
 
         return trips;

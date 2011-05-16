@@ -27,12 +27,12 @@ public class ZenalUpdater extends SeleniumBase {
         log.debug(String.format("about to create %s", entry));
         selenium.open("/ZeitnachweisEditPage.aspx");
         selenium.type("txtDatum", entry.getFrom().toString("dd.MM.YYYY"));
-        selenium.select("ddlProjekt", String.format("label=%s", entry.getProjectId()));
+        selenium.select("ddlProjekt", String.format("label=%s", entry.getProject().getProjectId()));
 
         selenium.type("txtZeitVon", entry.getFrom().toString("kk:mm"));
         selenium.type("txtZeitBis", entry.getTill().toString("kk:mm"));
         selenium.type("txtBemerkung", entry.getDescription());
-        selenium.select("ddlKategorie", String.format("label=%s", entry.getCategory()));
+        selenium.select("ddlKategorie", String.format("label=%s", entry.getCategory().getCategoryName()));
         selenium.click("btnSpeichern");
         selenium.waitForPageToLoad("30000");
         try {

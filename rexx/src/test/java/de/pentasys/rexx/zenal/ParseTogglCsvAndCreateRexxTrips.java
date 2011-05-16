@@ -12,6 +12,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
+import de.pentasys.builder.Project;
 import de.pentasys.builder.TimespanDateTime;
 import de.pentasys.rexx.builder.RexxJourney;
 import de.pentasys.rexx.entities.RexxTrip;
@@ -85,6 +86,8 @@ public class ParseTogglCsvAndCreateRexxTrips {
         assertThat(journey.getArrivalCity(), is("Ingolstadt"));
         assertThat(journey.getLeavingCity(), is("MUC"));
 
+        assertThat(journey.getProject(), is(Project.MEDIASATURN));
+
         assertThat(journey.getTrips().size(), is(5));
         assertThat(journey.getTrips(),
                 hasItem(trip(new DateTime(2011, 5, 9, 7, 50, 0, 0), new DateTime(2011, 5, 9, 19, 10, 0, 0))));
@@ -98,12 +101,12 @@ public class ParseTogglCsvAndCreateRexxTrips {
                 hasItem(trip(new DateTime(2011, 5, 13, 7, 50, 0, 0), new DateTime(2011, 5, 13, 17, 15, 0, 0))));
     }
 
-    protected RexxTrip trip(final DateTime from, final DateTime till) {
+    private RexxTrip trip(final DateTime from, final DateTime till) {
         return new RexxTrip(new TripCities("MUC", "Ingolstadt"), new TimespanDateTime(from, till),
                 "Projekteinsatz [P080811.MED]");
     }
 
-    private ZenalEntryList readFromCsv() {
+    public static ZenalEntryList readFromCsv() {
         final ZenalEntryList zenalEntries = new TogglRetriever()
                 .readEntriesFromCsv("src/test/resources/whole_week_report.csv");
 

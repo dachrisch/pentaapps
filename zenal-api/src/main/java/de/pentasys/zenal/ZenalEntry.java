@@ -43,12 +43,12 @@ public class ZenalEntry implements Comparable<ZenalEntry> {
         return description;
     }
 
-    public String getProjectId() {
-        return null == project ? null : project.getProjectId();
+    public Project getProject() {
+        return project ;
     }
 
-    public String getCategory() {
-        return category.getCategory();
+    public Category getCategory() {
+        return category;
     }
 
     @Override

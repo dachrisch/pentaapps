@@ -33,7 +33,7 @@ public class ZenalToRexxTripConverter {
     }
 
     public static String extractCityInfo(final ZenalEntry zenalEntry, final Category category) {
-        if (!category.getCategory().equals(zenalEntry.getCategory())) {
+        if (!category.equals(zenalEntry.getCategory())) {
             throw new IllegalArgumentException(String.format("entry [%s] not of type [%s]", zenalEntry, category));
         }
         final Matcher matcher = CITY_PATTERN.matcher(zenalEntry.getDescription());
