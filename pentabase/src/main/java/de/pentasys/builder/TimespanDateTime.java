@@ -1,5 +1,6 @@
 package de.pentasys.builder;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.joda.time.DateTime;
 
 public class TimespanDateTime {
@@ -20,4 +21,8 @@ public class TimespanDateTime {
         return till;
     }
 
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }
