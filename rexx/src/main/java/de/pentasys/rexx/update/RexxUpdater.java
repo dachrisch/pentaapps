@@ -7,15 +7,17 @@ import de.pentasys.rexx.builder.RexxJourney;
 public class RexxUpdater {
 
     private final Selenium selenium;
+    private final RexxTripsUpdater rexxTripsUpdater;
 
     public RexxUpdater(final Selenium selenium) {
         this.selenium = selenium;
+        rexxTripsUpdater = new RexxTripsUpdater(selenium);
     }
 
     public void createJourney(final RexxJourney rexxJourney) {
         gotoSpesenPage();
         createInlandJourney(rexxJourney);
-        new RexxTripsUpdater(selenium).createTrips(rexxJourney.getTrips());
+        rexxTripsUpdater.createTrips(rexxJourney.getTrips());
     }
 
     private void createInlandJourney(final RexxJourney rexxJourney) {
