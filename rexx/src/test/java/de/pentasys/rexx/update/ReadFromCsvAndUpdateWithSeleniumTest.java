@@ -2,6 +2,7 @@ package de.pentasys.rexx.update;
 
 import static de.pentasys.builder.DateTimeGenerator.date;
 import static de.pentasys.builder.DateTimeGenerator.from;
+import static de.pentasys.builder.TimespanDateTime.weekOf;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -50,7 +51,7 @@ public class ReadFromCsvAndUpdateWithSeleniumTest {
         expectTrip(seleniumMock, from(new DateTime(2011, 5, 13, 7, 50, 0, 0)).till(17, 15));
 
         replay(seleniumMock);
-        new RexxUpdater(seleniumMock).createJourney(rexxJourney);
+        new RexxUpdater(seleniumMock).updateJourney(rexxJourney);
         verify(seleniumMock);
     }
 
@@ -82,9 +83,4 @@ public class ReadFromCsvAndUpdateWithSeleniumTest {
         seleniumMock.waitForPageToLoad("30000");
     }
 
-    public static TimespanDateTime weekOf(final DateTime date) {
-        final DateTime firstOfWeek = date.minusDays(date.getDayOfWeek() - 1).withTime(0, 0, 0, 0);
-        final DateTime lastOfWeek = date.plusDays(7 - date.getDayOfWeek()).withTime(23, 59, 59, 999);
-        return new TimespanDateTime(firstOfWeek, lastOfWeek);
-    }
 }

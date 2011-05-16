@@ -123,7 +123,7 @@ public class CreateSeleniumCommandFromRexxJourneyTest {
 
         replay(seleniumMock);
 
-        new RexxUpdater(seleniumMock).createJourney(rexxJourney);
+        new RexxUpdater(seleniumMock).updateJourney(rexxJourney);
 
         verify(seleniumMock);
     }

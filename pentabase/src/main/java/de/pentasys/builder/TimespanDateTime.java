@@ -5,6 +5,16 @@ import org.joda.time.DateTime;
 
 public class TimespanDateTime {
 
+    public static TimespanDateTime thisWeek() {
+        return weekOf(new DateTime());
+    }
+
+    public static TimespanDateTime weekOf(final DateTime date) {
+        final DateTime firstOfWeek = date.minusDays(date.getDayOfWeek() - 1).withTime(0, 0, 0, 0);
+        final DateTime lastOfWeek = date.plusDays(7 - date.getDayOfWeek()).withTime(23, 59, 59, 999);
+        return new TimespanDateTime(firstOfWeek, lastOfWeek);
+    }
+
     private final DateTime from;
     private final DateTime till;
 
