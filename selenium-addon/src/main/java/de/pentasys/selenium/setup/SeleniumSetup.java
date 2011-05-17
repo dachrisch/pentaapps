@@ -10,10 +10,14 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class SeleniumSetup {
 
     public static WebDriverBackedSelenium createSeleniumInstance(final String url) {
-        final File binaryLocation = new File(System.getProperty("firefox.binary",
-                "C:\\Users\\daehnc\\AppData\\Local\\Mozilla Firefox\\firefox.exe"));
-        final WebDriver webDriver = new FirefoxDriver(new FirefoxBinary(binaryLocation), null);
+        final FirefoxBinary firefoxBinary = new FirefoxBinary(locateFirefoxBinary());
+        final WebDriver webDriver = new FirefoxDriver(firefoxBinary, null);
 
         return new WebDriverBackedSelenium(webDriver, url);
+    }
+
+    public static File locateFirefoxBinary() {
+        final File binaryLocation = new File(System.getProperty("firefox.binary"));
+        return binaryLocation;
     }
 }

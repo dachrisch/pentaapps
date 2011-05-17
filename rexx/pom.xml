@@ -6,7 +6,7 @@
 		<artifactId>pentaparent</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	
+
 	<groupId>org.dachrisch.pentasys-webapps</groupId>
 	<artifactId>rexx</artifactId>
 	<version>1.0-SNAPSHOT</version>
@@ -49,4 +49,19 @@
 		</dependency>
 	</dependencies>
 
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<systemProperties>
+						<property>
+							<name>firefox.binary</name>
+							<value>${firefox.binary}</value>
+						</property>
+					</systemProperties>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
