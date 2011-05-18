@@ -11,7 +11,7 @@ import de.pentasys.builder.Project;
 import de.pentasys.zenal.ZenalEntry;
 import de.pentasys.zenal.ZenalEntryList;
 
-public class TogglRetrieverTest {
+public class TogglCsvConverterTest {
 
     @Test
     public void convertCsvToZenalEntries() throws Exception {
