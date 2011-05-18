@@ -45,7 +45,19 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
-			
+
+			<!-- == HTTP Client in 4.1 (for NTLM support) -->
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpcore</artifactId>
+				<version>4.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>4.1</version>
+			</dependency>
+
 			<dependency>
 				<groupId>org.hamcrest</groupId>
 				<artifactId>hamcrest-all</artifactId>
@@ -64,7 +76,7 @@
 				<version>4.8.1</version>
 				<scope>test</scope>
 			</dependency>
-			
+
 			<!-- == Logging == -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
