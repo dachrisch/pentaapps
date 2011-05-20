@@ -29,6 +29,9 @@ public class ZenalEntryMapperTest {
 
         mapper.setProject("mediasaturn");
         assertThat(mapper.toZenalEntry().getProject(), is(Project.MEDIASATURN));
+
+        mapper.setProject("Last- und Performancetests");
+        assertThat(mapper.toZenalEntry().getProject(), is(Project.LASTUNDPERFORMANCETESTS));
     }
 
     @Test

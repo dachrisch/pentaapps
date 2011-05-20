@@ -36,7 +36,7 @@ public class ZenalEntryMapper {
     }
 
     public void setProject(final String project) {
-        this.project = Project.valueOf(project.toUpperCase());
+        this.project = Project.valueOf(project.replaceAll("[^\\w]+", "").toUpperCase());
     }
 
     public ZenalEntry toZenalEntry() {

@@ -1,7 +1,7 @@
 package de.pentasys.builder;
 
 public enum Project {
-    MEDIASATURN("P080811.MED");
+    MEDIASATURN("P080811.MED"), LASTUNDPERFORMANCETESTS("P100802.WWK");
 
     private final String projectId;
 
