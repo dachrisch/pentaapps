@@ -17,7 +17,10 @@ public class SeleniumSetup {
     }
 
     public static File locateFirefoxBinary() {
-        final File binaryLocation = new File(System.getProperty("firefox.binary"));
+        String property = System.getProperty("firefox.binary");
+        if(null == property)
+            throw new IllegalArgumentException("system property not set: -Dfirefox.binary=");
+        final File binaryLocation = new File(property);
         return binaryLocation;
     }
 }
