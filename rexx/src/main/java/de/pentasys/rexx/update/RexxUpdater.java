@@ -50,6 +50,7 @@ public class RexxUpdater {
 
     private void gotoSpesenPage() {
         selenium.open("/");
+        selenium.waitForPageToLoad("30000");
         selenium.click("//a[4]/font[contains(text(), 'Spesen')]");
         selenium.waitForPageToLoad("30000");
     }
@@ -79,10 +80,6 @@ public class RexxUpdater {
         final Selenium selenium = createSeleniumInstance("http://pentasys-portal.rexx-hr.de/");
 
         final RexxUpdater updater = new RexxUpdater(selenium);
-        final String username = console.readLine("username: ");
-        final String password = new String(console.readPassword("enter your password"));
-
-        updater.login(username, password);
         for (final RexxJourney journey : journeys) {
             log.info(String.format("updating journey [%s]", journey));
             updater.updateJourney(journey);

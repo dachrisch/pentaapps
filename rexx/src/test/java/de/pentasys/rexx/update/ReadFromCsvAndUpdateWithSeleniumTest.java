@@ -99,6 +99,7 @@ public class ReadFromCsvAndUpdateWithSeleniumTest {
 
     private void expectJourney(final Selenium seleniumMock) {
         seleniumMock.open("/");
+        seleniumMock.waitForPageToLoad("30000");
         seleniumMock.click("//a[4]/font[contains(text(), 'Spesen')]");
         seleniumMock.waitForPageToLoad("30000");
         seleniumMock.click("css=img[title=Inlandsreise]");

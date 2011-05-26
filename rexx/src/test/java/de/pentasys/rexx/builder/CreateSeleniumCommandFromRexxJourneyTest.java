@@ -109,6 +109,7 @@ public class CreateSeleniumCommandFromRexxJourneyTest {
         final Selenium seleniumMock = createStrictMock(Selenium.class);
         // journey
         seleniumMock.open("/");
+        seleniumMock.waitForPageToLoad("30000");
         seleniumMock.click("//a[4]/font[contains(text(), 'Spesen')]");
         seleniumMock.waitForPageToLoad("30000");
         seleniumMock.click("css=img[title=Inlandsreise]");
