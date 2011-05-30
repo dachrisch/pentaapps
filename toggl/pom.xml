@@ -5,9 +5,7 @@
     <groupId>org.dachrisch.pentasys-webapps</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <groupId>org.dachrisch.pentasys-webapps</groupId>
   <artifactId>toggl</artifactId>
-  <version>1.0-SNAPSHOT</version>
   <name>org.dachrisch.pentasys-webapps.toggl</name>
   <dependencies>
     <dependency>

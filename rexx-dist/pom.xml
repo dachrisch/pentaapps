@@ -6,9 +6,7 @@
 		<artifactId>pentaparent</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<groupId>org.dachrisch.pentasys-webapps</groupId>
 	<artifactId>rexx-dist</artifactId>
-	<version>1.0-SNAPSHOT</version>
 	<name>org.dachrisch.pentasys-webapps.rexx-dist</name>
 
 	<properties>

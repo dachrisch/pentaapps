@@ -6,9 +6,7 @@
 		<groupId>org.dachrisch.pentasys-webapps</groupId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<groupId>org.dachrisch.pentasys-webapps</groupId>
 	<artifactId>zenal-api</artifactId>
-	<version>1.0-SNAPSHOT</version>
 	<name>org.dachrisch.pentasys-webapps.zenal-api</name>
 	<dependencies>
 		<dependency>
