@@ -7,6 +7,7 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
 import java.util.Collections;
+import java.util.TreeSet;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
@@ -26,106 +27,108 @@ import de.pentasys.rexx.update.RexxTripsUpdater;
 import de.pentasys.rexx.update.RexxUpdater;
 
 public class CreateSeleniumCommandFromRexxJourneyTest {
-    @Test
-    public void createTaxiExpenseCommands() throws Exception {
+	@Test
+	public void createJourneyCommands() throws Exception {
+		final RexxJourney rexxJourney = new RexxJourney(Project.MEDIASATURN, new TripCities("a", "b"),
+				new TimespanDateTime(new DateTime(2010, 1, 1, 10, 20, 0, 0), new DateTime(2010, 1, 2, 20, 10, 0, 0)));
+		final Selenium seleniumMock = createStrictMock(Selenium.class);
+		// journey
+		seleniumMock.open("/rexx-hr/pentasys/expenses/portal/index.php");
+		seleniumMock.waitForPageToLoad("30000");
+		seleniumMock.click("//a[4]/font[contains(text(), 'Spesen')]");
+		seleniumMock.waitForPageToLoad("30000");
+		seleniumMock.click("css=img[title=Inlandsreise]");
+		seleniumMock.waitForPageToLoad("30000");
+		seleniumMock.select("60", "label=P080811.MED");
+		seleniumMock.type("2_date", "01.01.2010");
+		seleniumMock.type("2_time", "10:20");
+		seleniumMock.type("5_date", "02.01.2010");
+		seleniumMock.type("5_time", "20:10");
+		seleniumMock.click("css=img[title=Speichern]");
+		seleniumMock.waitForPageToLoad("30000");
 
-        final TaxiExpense amount = new TaxiExpense(12.99, Payment.CASH);
-        final DateTime issueDate = new DateTime();
-        amount.setIssueDate(issueDate);
-        final Selenium seleniumMock = createStrictMock(Selenium.class);
+		replay(seleniumMock);
 
-        seleniumMock.click("css=img[title=Neuen Beleg anlegen]");
-        seleniumMock.waitForPageToLoad("30000");
-        seleniumMock.select("6", "label=Taxi bis 50 km");
-        seleniumMock.waitForPageToLoad("30000");
-        seleniumMock.type("34_date", issueDate.toString("dd.MM.YYYY"));
-        seleniumMock.type("34_time", issueDate.toString("kk:mm"));
-        seleniumMock.type("9", "12.99");
-        seleniumMock.select("18", "label=Bar");
+		new RexxUpdater(seleniumMock).updateJourney(rexxJourney);
 
-        seleniumMock.click("css=img[title=Speichern]");
-        seleniumMock.waitForPageToLoad("30000");
-        replay(seleniumMock);
+		verify(seleniumMock);
+	}
 
-        new ExpenseUpdater(seleniumMock).createExpenses(Collections.singletonList((Expense) amount));
+	@Test
+	public void createTaxiExpenseCommands() throws Exception {
 
-        verify(seleniumMock);
-    }
+		final TaxiExpense amount = new TaxiExpense(12.99, Payment.CASH);
+		final DateTime issueDate = new DateTime();
+		amount.setIssueDate(issueDate);
+		final Selenium seleniumMock = createStrictMock(Selenium.class);
 
-    @Test
-    public void createTrainExpenseCommands() throws Exception {
+		seleniumMock.click("//img[@title='Neuen Beleg anlegen']");
+		seleniumMock.waitForPageToLoad("30000");
+		seleniumMock.select("6", "label=Taxi bis 50 km");
+		seleniumMock.waitForPageToLoad("30000");
+		seleniumMock.type("34_date", issueDate.toString("dd.MM.YYYY"));
+		seleniumMock.type("34_time", issueDate.toString("kk:mm"));
+		seleniumMock.type("9", "12,99");
+		seleniumMock.select("18", "label=Bar");
 
-        final TrainExpense amount = new TrainExpense(14.99, Payment.CREDIT);
-        final DateTime issueDate = new DateTime();
-        amount.setIssueDate(issueDate);
-        final Selenium seleniumMock = createStrictMock(Selenium.class);
+		seleniumMock.click("css=img[title=Speichern]");
+		seleniumMock.waitForPageToLoad("30000");
+		replay(seleniumMock);
 
-        seleniumMock.click("css=img[title=Neuen Beleg anlegen]");
-        seleniumMock.waitForPageToLoad("30000");
-        seleniumMock.select("6", "label=Öffentliche Verkehrsmittel über 50 KM");
-        seleniumMock.waitForPageToLoad("30000");
-        seleniumMock.type("34_date", issueDate.toString("dd.MM.YYYY"));
-        seleniumMock.type("34_time", issueDate.toString("kk:mm"));
-        seleniumMock.type("9", "14.99");
-        seleniumMock.select("18", "label=Firmenkreditkarte");
+		new ExpenseUpdater(seleniumMock).createExpenses(Collections.singletonList((Expense) amount));
 
-        seleniumMock.click("css=img[title=Speichern]");
-        seleniumMock.waitForPageToLoad("30000");
-        replay(seleniumMock);
+		verify(seleniumMock);
+	}
 
-        new ExpenseUpdater(seleniumMock).createExpenses(Collections.singletonList((Expense) amount));
+	@Test
+	public void createTrainExpenseCommands() throws Exception {
 
-        verify(seleniumMock);
-    }
+		final TrainExpense amount = new TrainExpense(14.99, Payment.CREDIT);
+		final DateTime issueDate = new DateTime();
+		amount.setIssueDate(issueDate);
+		final Selenium seleniumMock = createStrictMock(Selenium.class);
 
-    @Test
-    public void createTripCommands() throws Exception {
-        final RexxTrip rexxTrip = new RexxTrip(new TripCities("b", "c"), from(datetime(2010, 1, 2, 10, 20)).till(
-                datetime(2010, 1, 2, 20, 10)), "projekteinsatz");
-        final Selenium seleniumMock = createStrictMock(Selenium.class);
-        // trip
-        seleniumMock.click("4");
-        seleniumMock.type("4", "projekteinsatz");
-        seleniumMock.type("1", "b");
-        seleniumMock.type("3", "c");
-        seleniumMock.type("7_time", "10:20");
-        seleniumMock.type("7_date", "02.01.2010");
-        seleniumMock.type("8_time", "20:10");
-        seleniumMock.type("8_date", "02.01.2010");
-        seleniumMock.click("css=img[title=Speichern]");
-        seleniumMock.waitForPageToLoad("30000");
+		seleniumMock.click("//img[@title='Neuen Beleg anlegen']");
+		seleniumMock.waitForPageToLoad("30000");
+		seleniumMock.select("6", "label=Öffentliche Verkehrsmittel über 50 KM");
+		seleniumMock.waitForPageToLoad("30000");
+		seleniumMock.type("34_date", issueDate.toString("dd.MM.YYYY"));
+		seleniumMock.type("34_time", issueDate.toString("kk:mm"));
+		seleniumMock.type("9", "14,99");
+		seleniumMock.select("18", "label=Firmenkreditkarte");
 
-        replay(seleniumMock);
+		seleniumMock.click("css=img[title=Speichern]");
+		seleniumMock.waitForPageToLoad("30000");
+		replay(seleniumMock);
 
-        new RexxTripsUpdater(seleniumMock).createTrips(Collections.singleton(rexxTrip));
+		new ExpenseUpdater(seleniumMock).createExpenses(Collections.singletonList((Expense) amount));
 
-        verify(seleniumMock);
-    }
+		verify(seleniumMock);
+	}
 
-    @Test
-    public void createJourneyCommands() throws Exception {
-        final RexxJourney rexxJourney = new RexxJourney(Project.MEDIASATURN, new TripCities("a", "b"),
-                new TimespanDateTime(new DateTime(2010, 1, 1, 10, 20, 0, 0), new DateTime(2010, 1, 2, 20, 10, 0, 0)));
-        final Selenium seleniumMock = createStrictMock(Selenium.class);
-        // journey
-        seleniumMock.open("/");
-        seleniumMock.waitForPageToLoad("30000");
-        seleniumMock.click("//a[4]/font[contains(text(), 'Spesen')]");
-        seleniumMock.waitForPageToLoad("30000");
-        seleniumMock.click("css=img[title=Inlandsreise]");
-        seleniumMock.waitForPageToLoad("30000");
-        seleniumMock.select("60", "label=P080811.MED");
-        seleniumMock.type("2_date", "01.01.2010");
-        seleniumMock.type("2_time", "10:20");
-        seleniumMock.type("5_date", "02.01.2010");
-        seleniumMock.type("5_time", "20:10");
-        seleniumMock.click("css=img[title=Speichern]");
-        seleniumMock.waitForPageToLoad("30000");
+	@Test
+	public void createTripCommands() throws Exception {
+		final RexxTrip rexxTrip = new RexxTrip(new TripCities("b", "c"), from(datetime(2010, 1, 2, 10, 20)).till(
+				datetime(2010, 1, 2, 20, 10)), "projekteinsatz");
+		final Selenium seleniumMock = createStrictMock(Selenium.class);
+		// trip
+		seleniumMock.click("4");
+		seleniumMock.type("4", "projekteinsatz");
+		seleniumMock.type("1", "b");
+		seleniumMock.type("3", "c");
+		seleniumMock.type("7_time", "10:20");
+		seleniumMock.type("7_date", "02.01.2010");
+		seleniumMock.type("8_time", "20:10");
+		seleniumMock.type("8_date", "02.01.2010");
+		seleniumMock.click("css=img[title=Speichern]");
+		seleniumMock.waitForPageToLoad("30000");
 
-        replay(seleniumMock);
+		replay(seleniumMock);
 
-        new RexxUpdater(seleniumMock).updateJourney(rexxJourney);
+		TreeSet<RexxTrip> trips = new TreeSet<RexxTrip>();
+		trips.add(rexxTrip);
+		new RexxTripsUpdater(seleniumMock).createTrips(trips);
 
-        verify(seleniumMock);
-    }
+		verify(seleniumMock);
+	}
 }
